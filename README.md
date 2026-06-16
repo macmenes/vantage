@@ -1,18 +1,21 @@
 <div align="center">
 
+<!-- BRANDING TODO: replace this block with assets/logo.png once re-dropped -->
 ```
- _    _____    _   ___________   ____________
-| |  / /   |  / | / /_  __/   | / ____/ ____/
-| | / / /| | /  |/ / / / / /| |/ / __/ __/
-| |/ / ___ |/ /|  / / / / ___ / /_/ / /___
-|___/_/  |_/_/ |_/ /_/ /_/  |_\____/_____/
+██     ██    ███    ██    ██ ████████    ███     ██████   ████████      ███████   ██████
+██     ██   ██ ██   ███   ██    ██      ██ ██   ██    ██  ██           ██     ██ ██    ██
+██     ██  ██   ██  ████  ██    ██     ██   ██  ██        ██           ██     ██ ██
+██     ██ ██     ██ ██ ██ ██    ██    ██     ██ ██   ████ ██████       ██     ██  ██████
+ ██   ██  █████████ ██  ████    ██    █████████ ██    ██  ██           ██     ██       ██
+  ██ ██   ██     ██ ██   ███    ██    ██     ██ ██    ██  ██       ███ ██     ██ ██    ██
+   ███    ██     ██ ██    ██    ██    ██     ██  ██████   ████████ ███  ███████   ██████
 
-        M A R K E T I N G   I N T E L L I G E N C E   O S
+                     marketing brain inside your agent
 ```
 
-# Vantage — Marketing Intelligence OS
+# Vantage.os — Marketing Intelligence OS
 
-### The marketing brain inside your coding agent. Run `/vantage`, answer a few questions, and get a beautiful, evidence-backed competitive teardown.
+### The marketing brain inside your agent. Run `/vantage`, answer a few questions, and get a beautiful, evidence-backed competitive teardown.
 
 Vantage maps the full digital-marketing surface of your rivals — positioning, content, website,
 paid, social, reputation — scores it into one **Digital Share-of-Voice** index, plots a
@@ -36,8 +39,8 @@ The deliverable is a single, gorgeous, self-contained **HTML report**.
 ```
 $ /vantage
 
-   V A N T A G E  ·  Marketing Intelligence OS
-   The marketing brain inside your coding agent.
+   V A N T A G E . O S  ·  Marketing Intelligence OS
+   marketing brain inside your agent
 
    ▸ What are you looking to do today?
      · Full competitive landscape   · Find my competitors

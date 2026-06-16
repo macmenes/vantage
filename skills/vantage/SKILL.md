@@ -13,11 +13,12 @@ description: >
 context: fork
 ---
 
-# Vantage — Marketing Intelligence OS
+# Vantage.os — Marketing Intelligence OS
 
-Vantage is a marketing-intelligence operating system that lives **inside your coding
-agent**. `/vantage` opens a guided console: it greets the user, asks what they want
-to do, and walks them there **one question at a time**.
+**Vantage.os** is a marketing-intelligence operating system that lives **inside your
+agent** — the marketing brain inside your coding agent. `/vantage` opens a guided
+console: it greets the user, asks what they want to do, and walks them there **one
+question at a time**.
 
 It runs in **Claude Code today** and is built to port to any agentic coding
 environment (Codex and others) — the experience is the same everywhere. Today it
@@ -36,16 +37,18 @@ marketing packs slot in over time.
 Print this banner **verbatim**, inside a plain fenced code block (monospace):
 
 ```
- _    _____    _   ___________   ____________
-| |  / /   |  / | / /_  __/   | / ____/ ____/
-| | / / /| | /  |/ / / / / /| |/ / __/ __/
-| |/ / ___ |/ /|  / / / / ___ / /_/ / /___
-|___/_/  |_/_/ |_/ /_/ /_/  |_\____/_____/
+██     ██    ███    ██    ██ ████████    ███     ██████   ████████      ███████   ██████
+██     ██   ██ ██   ███   ██    ██      ██ ██   ██    ██  ██           ██     ██ ██    ██
+██     ██  ██   ██  ████  ██    ██     ██   ██  ██        ██           ██     ██ ██
+██     ██ ██     ██ ██ ██ ██    ██    ██     ██ ██   ████ ██████       ██     ██  ██████
+ ██   ██  █████████ ██  ████    ██    █████████ ██    ██  ██           ██     ██       ██
+  ██ ██   ██     ██ ██   ███    ██    ██     ██ ██    ██  ██       ███ ██     ██ ██    ██
+   ███    ██     ██ ██    ██    ██    ██     ██  ██████   ████████ ███  ███████   ██████
 ```
 
 Then exactly two lines:
-- **Vantage — Marketing Intelligence OS**
-- _The marketing brain inside your coding agent._
+- **Vantage.os — Marketing Intelligence OS**
+- _marketing brain inside your agent_
 
 ### Step 2 — The interview (THIS IS THE CORE UX)
 
