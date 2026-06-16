@@ -5,16 +5,16 @@
     "url": "https://github.com/macmenes"
   },
   "metadata": {
-    "description": "Vantage.os — Marketing Intelligence OS. Beautiful, evidence-backed competitive teardowns for marketing & sales, inside your agent.",
-    "version": "0.1.0",
+    "description": "Vantage.os — Marketing Intelligence OS. Beautiful, evidence-backed competitive teardowns and marketing creation (positioning, ads, content, lifecycle), inside your agent.",
+    "version": "0.2.0",
     "repository": "https://github.com/macmenes/vantage"
   },
   "plugins": [
     {
       "name": "vantage",
       "source": ".",
-      "description": "Competitive landscape analysis for marketing & sales teams — Digital Share-of-Voice index, positioning map, competitive matrix, and sales battlecards, delivered as a single beautiful self-contained HTML report. Web-only, no API keys. 9 skills: an umbrella orchestrator plus discover, positioning, website, content, ads, social, battlecard, and monitor specialists.",
-      "version": "0.1.0",
+      "description": "Vantage.os — Marketing Intelligence OS. ANALYZE the field (Digital Share-of-Voice index, positioning map, competitive matrix, sales battlecards) and BUILD your marketing (positioning & messaging house, paid-media ad concepts, content plan, lifecycle/email flows). Every skill delivers a beautiful self-contained HTML report. Web-only, no API keys. 13 skills across 5 packs, driven by a one-question-at-a-time /vantage console.",
+      "version": "0.2.0",
       "category": "marketing",
       "tags": [
         "competitive-analysis",
@@ -23,11 +23,15 @@
         "market-research",
         "share-of-voice",
         "positioning",
+        "messaging",
+        "ad-copy",
+        "content-strategy",
+        "email-marketing",
+        "lifecycle-marketing",
         "battlecard",
         "sales-enablement",
         "marketing",
         "growth",
-        "ad-library",
         "go-to-market"
       ],
       "skills": [
@@ -39,7 +43,11 @@
         "./skills/vantage-ads",
         "./skills/vantage-social",
         "./skills/vantage-battlecard",
-        "./skills/vantage-monitor"
+        "./skills/vantage-monitor",
+        "./skills/vantage-messaging",
+        "./skills/vantage-ad-lab",
+        "./skills/vantage-content-plan",
+        "./skills/vantage-lifecycle"
       ]
     }
   ]

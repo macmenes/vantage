@@ -21,12 +21,17 @@ console: it greets the user, asks what they want to do, and walks them there **o
 question at a time**.
 
 It runs in **Claude Code today** and is built to port to any agentic coding
-environment (Codex and others) — the experience is the same everywhere. Today it
-ships the **Competitive Analysis** pack: full-funnel digital-marketing teardowns
-scored into a **Digital Share-of-Voice (DSoV) index**, a **positioning map**, a
-**competitive matrix**, and **sales battlecards**, delivered as a single beautiful
-self-contained **HTML report**. Web-only, no API keys. Vantage is a **hub** — more
-marketing packs slot in over time.
+environment (Codex and others) — the experience is the same everywhere. Web-only, no
+API keys. Every skill delivers a single beautiful self-contained **HTML report**.
+
+Vantage is a **hub** of marketing packs — it first **analyzes the field**, then helps
+you **act on it**:
+
+- **Competitive Analysis** — full-funnel teardowns → DSoV index, positioning map, matrix, battlecards
+- **Positioning Studio** — build your messaging house, value prop, hero copy, narrative
+- **Paid-Media Lab** — turn ad intelligence into ad concepts, hooks, full copy, test plan
+- **Content Engine** — pillar/cluster plan, topic backlog, content briefs, calendar
+- **Lifecycle & Email** — lifecycle map, sequences, full email copy, trigger logic
 
 ---
 
@@ -71,16 +76,25 @@ Then exactly two lines:
 > **What are you looking to do today?**
 
 Then, briefly, orient them with what Vantage can do (a light menu — this is still the
-single Q1, not a dump of intake questions):
+single Q1, not a dump of intake questions). Group it **Analyze** vs **Build**:
 
-- **Full competitive landscape** — the complete teardown + report (most popular)
-- **Find my competitors** — discover & tier the real set
-- **Positioning & messaging** — how rivals position, where the white space is
-- **Website / paid ads / content / social** — a single-channel teardown
-- **Sales battlecard** — how to beat one specific competitor
-- **Monitor** — keep watch on competitors over time
+**🔍 Analyze the field**
+- **Full competitive landscape** — the complete teardown + report (most popular) → orchestrate
+- **Find my competitors** — discover & tier the set → `vantage-discover`
+- **Teardown one channel** — positioning / website / content / ads / social of rivals →
+  `vantage-positioning` · `vantage-website` · `vantage-content` · `vantage-ads` · `vantage-social`
+- **Sales battlecard** — how to beat one competitor → `vantage-battlecard`
+- **Monitor** — watch competitors over time → `vantage-monitor`
+
+**🛠 Build your marketing**
+- **Positioning & messaging** — your value prop, messaging house, hero copy → `vantage-messaging`
+- **Ad concepts / campaign** — hooks + full ad copy + test plan → `vantage-ad-lab`
+- **Content plan** — pillars, topic backlog, briefs, calendar → `vantage-content-plan`
+- **Lifecycle & email** — flows + full email copy + triggers → `vantage-lifecycle`
 
 Wait for their answer, then route to the matching skill and continue the interview.
+(The "Build" skills pair naturally with a prior analysis — offer to pull from an
+existing teardown, or to run the relevant analysis first if none exists.)
 
 ### Step 3 — Follow-up questions (one at a time, only what's needed)
 
@@ -163,11 +177,18 @@ Rubrics and how to score from web-only evidence: **`references/scoring-framework
 
 ## Sub-Skills
 
+**🔍 Analyze — Competitive Analysis pack**
 1. **vantage-discover** — Build & tier the real competitor set
-2. **vantage-positioning** — Messaging, ICP, category, differentiation matrix
-3. **vantage-website** — Website & conversion-path teardown
-4. **vantage-content** — Content engine & organic footprint (marketing read)
-5. **vantage-ads** — Paid-media & ad-creative intelligence
-6. **vantage-social** — Social presence & share-of-voice
+2. **vantage-positioning** — Competitor messaging, ICP, category, differentiation matrix
+3. **vantage-website** — Competitor website & conversion-path teardown
+4. **vantage-content** — Competitor content engine & organic footprint (marketing read)
+5. **vantage-ads** — Competitor paid-media & ad-creative intelligence
+6. **vantage-social** — Competitor social presence & share-of-voice
 7. **vantage-battlecard** — Sales battlecards & win/loss
 8. **vantage-monitor** — Recurring competitive monitoring
+
+**🛠 Build — marketing creation packs**
+9. **vantage-messaging** — Positioning Studio: your messaging house, value prop, hero copy, narrative
+10. **vantage-ad-lab** — Paid-Media Lab: ad concepts, hook bank, full ad copy, creative briefs, test plan
+11. **vantage-content-plan** — Content Engine: pillar/cluster plan, topic backlog, content briefs, calendar
+12. **vantage-lifecycle** — Lifecycle & Email: lifecycle map, sequences, full email copy, trigger logic

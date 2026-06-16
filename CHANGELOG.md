@@ -3,6 +3,20 @@
 All notable changes to **Vantage** are documented here.
 This project adheres to [Semantic Versioning](https://semver.org).
 
+## [0.2.0] — 2026-06-16
+
+Vantage becomes a hub: "analyze the field" **and** "build your marketing."
+
+### Added — four marketing creation packs (HTML deliverable each)
+- **Positioning Studio** (`vantage-messaging`) — Dunford-style positioning, messaging house, value prop & one-liners, 3 hero-copy variants, voice/tone, narrative → `MESSAGING-HOUSE.html`.
+- **Paid-Media Lab** (`vantage-ad-lab`) — angle matrix, hook bank, full ad variants (Meta / Google RSA / LinkedIn / video), creative briefs, LP outline, test plan → `CAMPAIGN-CONCEPTS.html`.
+- **Content Engine** (`vantage-content-plan`) — pillar/cluster map, prioritized topic backlog, full content briefs, editorial calendar → `CONTENT-PLAN.html`.
+- **Lifecycle & Email** (`vantage-lifecycle`) — lifecycle map, core sequences, full email copy, trigger/timing logic → `LIFECYCLE-FLOWS.html`.
+
+### Changed
+- Console menu now groups **🔍 Analyze** vs **🛠 Build**; the Build skills offer to pull from a prior teardown or run the analysis first.
+- 13 skills across 5 packs. Manifests, README, commands, and roadmap updated.
+
 ## [0.1.0] — 2026-06-16
 
 Initial public release.

@@ -19,10 +19,11 @@
 
 Vantage maps the full digital-marketing surface of your rivals — positioning, content, website,
 paid, social, reputation — scores it into one **Digital Share-of-Voice** index, plots a
-**positioning map**, builds a **competitive matrix**, and writes rep-ready **sales battlecards**.
-The deliverable is a single, gorgeous, self-contained **HTML report**.
+**positioning map**, builds a **competitive matrix**, and writes rep-ready **sales battlecards** —
+then turns what you find into **your** positioning, ad concepts, content plan, and email flows.
+Every skill delivers a single, gorgeous, self-contained **HTML report**.
 
-**Lives inside your coding agent · Web search + fetch only · No API keys · Free & open source.**
+**Lives inside your agent · Web search + fetch only · No API keys · Free & open source.**
 
 [Install](#install) · [The experience](#the-experience) · [What you get](#what-you-get) · [Commands](#commands) · [How it works](#how-it-works) · [Sample report](examples/sample-competitive-landscape.html)
 
@@ -171,6 +172,10 @@ The flow, scoring, and HTML report are identical everywhere.
 | `/vantage social <domains>` | Social presence & share-of-voice |
 | `/vantage battlecard <competitor>` | Rep-ready sales battlecard |
 | `/vantage monitor <domains>` | Stand up recurring competitive monitoring |
+| `/vantage messaging <domain>` | **Build** your positioning & messaging house + hero copy |
+| `/vantage ads <domain>` *(build)* | **Build** ad concepts, hooks, full copy, test plan |
+| `/vantage content-plan <domain>` | **Build** a content plan — pillars, backlog, briefs, calendar |
+| `/vantage lifecycle <domain>` | **Build** lifecycle & email flows + full copy |
 
 ## How it works
 
@@ -214,14 +219,20 @@ No channel is scored without ≥3 cited signals. Full rubrics live in
 | Skill | Role |
 |-------|------|
 | `vantage` | The console — splash, interview, dispatch + shared reference frameworks |
+| **🔍 Analyze** | **— Competitive Analysis pack** |
 | `vantage-discover` | Build & tier the real competitor set (incl. the "do-nothing" indirect tier) |
-| `vantage-positioning` | Messaging matrix, positioning 2×2, differentiation white space |
-| `vantage-website` | Funnel, CTAs, pricing presentation, proof, lead capture |
-| `vantage-content` | Content engine, share-of-search, content gaps |
-| `vantage-ads` | Ad-library creative & offer intelligence |
-| `vantage-social` | Social & share-of-voice (engagement > follower vanity) |
+| `vantage-positioning` | Competitor messaging matrix, positioning 2×2, white space |
+| `vantage-website` | Competitor funnel, CTAs, pricing, proof, lead capture |
+| `vantage-content` | Competitor content engine, share-of-search, content gaps |
+| `vantage-ads` | Competitor ad-library creative & offer intelligence |
+| `vantage-social` | Competitor social & share-of-voice (engagement > follower vanity) |
 | `vantage-battlecard` | Honest, evidence-backed sales battlecards |
 | `vantage-monitor` | Diff-since-last-check competitive watch |
+| **🛠 Build** | **— marketing creation packs** |
+| `vantage-messaging` | Positioning Studio — messaging house, value prop, hero copy, narrative |
+| `vantage-ad-lab` | Paid-Media Lab — ad concepts, hook bank, full ad copy, creative briefs, test plan |
+| `vantage-content-plan` | Content Engine — pillar/cluster plan, topic backlog, content briefs, calendar |
+| `vantage-lifecycle` | Lifecycle & Email — lifecycle map, sequences, full email copy, triggers |
 
 ## Responsible by design
 
@@ -235,13 +246,14 @@ quantitative claim is cited with a capture date. See
 
 Vantage is built as an **OS / hub**: `/vantage` is the front door to a growing pack of marketing skills.
 
-- [x] **Competitive Analysis** pack (this release)
+- [x] **Competitive Analysis** pack — teardowns, DSoV, positioning map, battlecards
+- [x] **Positioning Studio** — messaging house, value prop, hero copy, narrative
+- [x] **Paid-Media Lab** — ad concepts, hooks, full copy, creative briefs, test plan
+- [x] **Content Engine** — pillar/cluster plan, topic backlog, briefs, calendar
+- [x] **Lifecycle & Email** — lifecycle map, sequences, full email copy, triggers
 - [ ] Hero logo + screenshot + short demo GIF
-- [ ] Ports for other coding agents (Codex and beyond)
-- [ ] **Positioning Studio** — messaging & narrative development
-- [ ] **Content Engine** — content strategy, briefs, calendars
-- [ ] **Paid-Media Lab** — ad concepting from competitive intelligence
-- [ ] **Lifecycle & Email** · **Brand & PR**
+- [ ] Native installers for more agents (Codex · Cline · Pi · Hermes)
+- [ ] **Brand & PR** pack
 - [ ] Optional connectors (DataForSEO / SerpAPI / SimilarWeb) as opt-in power-ups
 
 ## Contributing

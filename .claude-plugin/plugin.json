@@ -1,7 +1,7 @@
 {
   "name": "vantage",
-  "version": "0.1.0",
-  "description": "Competitive landscape analysis for marketing & sales teams. Maps the full digital-marketing surface of a competitor set — positioning, content, website, paid, social, reputation — into a Digital Share-of-Voice index, positioning map, competitive matrix, and sales battlecards. Delivers a single, beautiful, self-contained HTML report. Runs on web search + fetch only, no API keys.",
+  "version": "0.2.0",
+  "description": "Vantage.os — Marketing Intelligence OS that lives inside your agent. Analyzes the competitive field (Digital Share-of-Voice index, positioning map, competitive matrix, sales battlecards) AND helps you act on it: positioning & messaging house, paid-media ad concepts, content plan, and lifecycle/email flows. Every skill delivers a beautiful self-contained HTML report. Web search + fetch only, no API keys.",
   "author": {
     "name": "macmenes",
     "url": "https://github.com/macmenes"
@@ -16,11 +16,16 @@
     "market-research",
     "share-of-voice",
     "positioning",
+    "messaging",
+    "copywriting",
+    "ad-copy",
+    "content-strategy",
+    "email-marketing",
+    "lifecycle-marketing",
     "battlecard",
     "sales-enablement",
     "marketing",
     "growth",
-    "ad-library",
     "go-to-market"
   ],
   "skills": [
@@ -32,6 +37,10 @@
     "./skills/vantage-ads",
     "./skills/vantage-social",
     "./skills/vantage-battlecard",
-    "./skills/vantage-monitor"
+    "./skills/vantage-monitor",
+    "./skills/vantage-messaging",
+    "./skills/vantage-ad-lab",
+    "./skills/vantage-content-plan",
+    "./skills/vantage-lifecycle"
   ]
 }
