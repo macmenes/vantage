@@ -1,34 +1,29 @@
 <div align="center">
 
 ```
-        ▲              ▲          ▲
-       ╱ ╲      ▲     ╱ ╲        ╱ ╲
-      ╱   ╲    ╱ ╲   ╱   ╲      ╱   ╲
-   ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔
+ _    _____    _   ___________   ____________
+| |  / /   |  / | / /_  __/   | / ____/ ____/
+| | / / /| | /  |/ / / / / /| |/ / __/ __/
+| |/ / ___ |/ /|  / / / / ___ / /_/ / /___
+|___/_/  |_/_/ |_/ /_/ /_/  |_\____/_____/
 
-   █   █  ███  █   █ █████  ███   ████ █████
-   █   █ █   █ ██  █   █   █   █ █     █
-   █   █ █████ █ █ █   █   █████ █  ██ ████
-    █ █  █   █ █  ██   █   █   █ █   █ █
-     █   █   █ █   █   █   █   █  ████ █████
-
-   S E E   T H E   W H O L E   F I E L D
+        M A R K E T I N G   I N T E L L I G E N C E   O S
 ```
 
-# Vantage — Competitive Analysis Skills Pack
+# Vantage — Marketing Intelligence OS
 
-### Marketing-intelligence skills for Claude Code. Type `/vantage`, pick a skill, answer a few questions — get a beautiful, evidence-backed competitive teardown.
+### The marketing brain inside your coding agent. Run `/vantage`, answer a few questions, and get a beautiful, evidence-backed competitive teardown.
 
-Point it at your domain. Vantage maps the full digital-marketing surface of your rivals —
-positioning, content, website, paid, social, reputation — scores it into one **Digital
-Share-of-Voice** index, plots a **positioning map**, builds a **competitive matrix**, and writes
-rep-ready **sales battlecards**. The deliverable is a single, gorgeous, self-contained **HTML report**.
+Vantage maps the full digital-marketing surface of your rivals — positioning, content, website,
+paid, social, reputation — scores it into one **Digital Share-of-Voice** index, plots a
+**positioning map**, builds a **competitive matrix**, and writes rep-ready **sales battlecards**.
+The deliverable is a single, gorgeous, self-contained **HTML report**.
 
-**Web search + fetch only. No API keys. Free and open source.**
+**Lives inside your coding agent · Web search + fetch only · No API keys · Free & open source.**
 
 [Install](#install) · [The experience](#the-experience) · [What you get](#what-you-get) · [Commands](#commands) · [How it works](#how-it-works) · [Sample report](examples/sample-competitive-landscape.html)
 
-<!-- BRANDING TODO: drop a hero screenshot of a generated report here once you take one -->
+<!-- BRANDING TODO: drop a hero logo + screenshot of a generated report here -->
 
 </div>
 
@@ -36,26 +31,44 @@ rep-ready **sales battlecards**. The deliverable is a single, gorgeous, self-con
 
 ## The experience
 
-`/vantage` is a launcher, not a one-shot command:
+`/vantage` isn't a one-shot command — it's a console that interviews you, **one question at a time**:
 
 ```
 $ /vantage
 
-   ▲   ▲   ▲     ┌─ VANTAGE ─────────────────────────────┐
-  ╱ ╲ ╱ ╲ ╱ ╲    │ 1 · Full competitive landscape         │
- ▔▔▔▔▔▔▔▔▔▔▔▔▔    │ 2 · Discover competitors               │
-                 │ 3 · Positioning & messaging            │
- (8-bit splash)  │ 4 · Website & conversion · 5 · Content │
-                 │ 6 · Paid media · 7 · Social            │
-                 │ 8 · Battlecard · 9 · Monitor           │
-                 └────────────────────────────────────────┘
+   V A N T A G E  ·  Marketing Intelligence OS
+   The marketing brain inside your coding agent.
 
-  → pick a skill → answer a few guided questions → it runs →
-    COMPETITIVE-LANDSCAPE.html opens in your browser.
+   ▸ What are you looking to do today?
+     · Full competitive landscape   · Find my competitors
+     · Positioning & messaging      · Website / ads / content / social
+     · Sales battlecard             · Monitor competitors
+
+   you ▸ full landscape
+
+   ▸ What's your brand or website?
+   you ▸ acme.com
+
+   ▸ Who are your main competitors — or want me to find them?
+   you ▸ find them for me
+
+   ▸ Who's this for — marketing, sales, or both?
+   you ▸ both
+
+   ▸ How deep should I go — quick, standard, or deep dive?
+   you ▸ standard
+
+   → Running… → COMPETITIVE-LANDSCAPE.html opens in your browser.
 ```
 
-Already know what you want? Skip the menu — `/vantage acme.com` or
+Already know what you want? Skip the interview — `/vantage acme.com` or
 `/vantage battlecard <competitor>` jumps straight in.
+
+## Runs inside any coding agent
+
+Vantage is a **marketing-intelligence OS that lives inside your coding agent**, not a
+single-vendor tool. It ships for **Claude Code** today and is built to port to other agentic
+coding environments (Codex and beyond) — same console, same reports, wherever you work.
 
 ## Why Vantage
 
@@ -86,7 +99,7 @@ hand straight to a founder, a growth lead, or a sales rep.
 
 ## Install
 
-**As a Claude Code plugin (recommended):**
+**Claude Code (reference implementation):**
 
 ```
 /plugin marketplace add macmenes/vantage
@@ -106,7 +119,7 @@ Then just type `/vantage`.
 
 | Command | What it does |
 |---------|-------------|
-| `/vantage` | Launch the menu → pick a skill → guided intake → run |
+| `/vantage` | Open the console — it interviews you, then runs |
 | `/vantage <your-domain>` | Jump straight to a full landscape teardown |
 | `/vantage <your-domain> vs <a>,<b>` | Full landscape with the competitor set supplied |
 | `/vantage discover <domain>` | Identify & tier the real competitor set |
@@ -120,7 +133,7 @@ Then just type `/vantage`.
 
 ## How it works
 
-The `vantage` launcher fans out to 8 specialists, scores each on web-only evidence, and
+The `vantage` console fans out to 8 specialists, scores each on web-only evidence, and
 synthesizes the result.
 
 ```
@@ -159,7 +172,7 @@ No channel is scored without ≥3 cited signals. Full rubrics live in
 
 | Skill | Role |
 |-------|------|
-| `vantage` | The launcher — splash, menu, guided intake, dispatch + shared reference frameworks |
+| `vantage` | The console — splash, interview, dispatch + shared reference frameworks |
 | `vantage-discover` | Build & tier the real competitor set (incl. the "do-nothing" indirect tier) |
 | `vantage-positioning` | Messaging matrix, positioning 2×2, differentiation white space |
 | `vantage-website` | Funnel, CTAs, pricing presentation, proof, lead capture |
@@ -179,10 +192,11 @@ quantitative claim is cited with a capture date. See
 
 ## Roadmap
 
-Vantage is built as a **hub**: `/vantage` is the front door to a growing pack of marketing skills.
+Vantage is built as an **OS / hub**: `/vantage` is the front door to a growing pack of marketing skills.
 
 - [x] **Competitive Analysis** pack (this release)
-- [ ] Hero screenshot + short demo GIF
+- [ ] Hero logo + screenshot + short demo GIF
+- [ ] Ports for other coding agents (Codex and beyond)
 - [ ] **Positioning Studio** — messaging & narrative development
 - [ ] **Content Engine** — content strategy, briefs, calendars
 - [ ] **Paid-Media Lab** — ad concepting from competitive intelligence

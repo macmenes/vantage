@@ -2,103 +2,106 @@
 name: vantage
 description: >
   TRIGGER when the user runs `/vantage`, or asks for competitive landscape /
-  competitive intelligence work, or says "competitive analysis", "competitor
-  teardown", "competitive landscape", "size up our competitors", "how do we stack
-  up", "share of voice", "competitive matrix", "build a battlecard". This is the
-  Vantage launcher — it shows the menu of marketing-intelligence skills, runs a
-  short guided intake, then dispatches to the right specialist.
+  competitive intelligence / marketing-intelligence work, or says "competitive
+  analysis", "competitor teardown", "competitive landscape", "size up our
+  competitors", "how do we stack up", "share of voice", "competitive matrix",
+  "build a battlecard". This is Vantage — a Marketing Intelligence OS. It opens a
+  guided console, asks what the user wants one question at a time, then runs it.
   DO NOT trigger for: pure technical/on-page SEO audits (use seo / seo-* skills),
   single "X vs Y" comparison PAGE creation (use seo-competitor-pages), backlink
   profiles only (use backlink-analyzer), or live keyword data lookups.
 context: fork
 ---
 
-# Vantage — Marketing-Intelligence Skills Launcher
+# Vantage — Marketing Intelligence OS
 
-`/vantage` is the front door to a growing pack of marketing skills. Today it ships
-the **Competitive Analysis** pack: full-funnel digital-marketing teardowns for
-marketing/growth and sales, scored into a **Digital Share-of-Voice (DSoV) index**,
-a **positioning map**, a **competitive matrix**, and **sales battlecards** —
-delivered as a single beautiful self-contained **HTML report**. Web-only, no API keys.
+Vantage is a marketing-intelligence operating system that lives **inside your coding
+agent**. `/vantage` opens a guided console: it greets the user, asks what they want
+to do, and walks them there **one question at a time**.
 
-## When invoked — the launcher flow
+It runs in **Claude Code today** and is built to port to any agentic coding
+environment (Codex and others) — the experience is the same everywhere. Today it
+ships the **Competitive Analysis** pack: full-funnel digital-marketing teardowns
+scored into a **Digital Share-of-Voice (DSoV) index**, a **positioning map**, a
+**competitive matrix**, and **sales battlecards**, delivered as a single beautiful
+self-contained **HTML report**. Web-only, no API keys. Vantage is a **hub** — more
+marketing packs slot in over time.
 
-Follow these steps in order. Keep it snappy and friendly; this is a branded experience.
+---
 
-### Step 1 — Show the splash
+## When invoked — the console flow
 
-Print this banner **verbatim**, inside a plain fenced code block so it renders in
-monospace (do not alter the spacing):
+### Step 1 — Splash
+
+Print this banner **verbatim**, inside a plain fenced code block (monospace):
 
 ```
-        ▲              ▲          ▲
-       ╱ ╲      ▲     ╱ ╲        ╱ ╲
-      ╱   ╲    ╱ ╲   ╱   ╲      ╱   ╲
-   ▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔▔
-
-   █   █  ███  █   █ █████  ███   ████ █████
-   █   █ █   █ ██  █   █   █   █ █     █
-   █   █ █████ █ █ █   █   █████ █  ██ ████
-    █ █  █   █ █  ██   █   █   █ █   █ █
-     █   █   █ █   █   █   █   █  ████ █████
-
-   S E E   T H E   W H O L E   F I E L D
+ _    _____    _   ___________   ____________
+| |  / /   |  / | / /_  __/   | / ____/ ____/
+| | / / /| | /  |/ / / / / /| |/ / __/ __/
+| |/ / ___ |/ /|  / / / / ___ / /_/ / /___
+|___/_/  |_/_/ |_/ /_/ /_/  |_\____/_____/
 ```
 
-Then one line: **"Vantage — marketing intelligence for Claude Code."**
+Then exactly two lines:
+- **Vantage — Marketing Intelligence OS**
+- _The marketing brain inside your coding agent._
 
-### Step 2 — Route or show the menu
+### Step 2 — The interview (THIS IS THE CORE UX)
 
-- If the user already gave clear intent (a domain, or a sub-command like
-  `battlecard <competitor>`, `ads <domain>`, `positioning <domains>`), **skip the
-  menu** and go straight to Step 3 for that skill.
-- Otherwise present the menu below (use `AskUserQuestion`, header "Skill"). List the
-  **available** Competitive Analysis skills as selectable options, and mention the
-  **coming-soon** packs in one line so the roadmap is visible.
+**WIZARD RULES — follow exactly:**
+- Ask **exactly ONE question per message.** Then **STOP and wait** for the user's
+  reply. Never put two questions in one message. Never pre-list all the questions.
+- Ask in **plain conversational text.** Do **not** depend on the AskUserQuestion
+  tool — it may be unavailable. (If it happens to be available, you may use it for a
+  single question, but the one-at-a-time rule still holds.)
+- For a question with a few sensible choices, offer them inline as a short lettered
+  list **for that one question only** — but keep it light and human, not a form.
+- Acknowledge each answer in a few words, then ask the next question. Keep momentum.
+- If the user already supplied something in their `/vantage` input (a domain, a
+  sub-command), **skip that question** and confirm it instead of re-asking.
+- Let the user say "skip", "you decide", or "just run it" at any point — take a
+  sensible default and move on. Don't interrogate.
 
-**Competitive Analysis pack (available now):**
+**Question 1 — always start here, on its own:**
 
-| # | Skill | What it does |
-|---|-------|--------------|
-| 1 | **Full landscape** | Discover the set → analyze every channel → DSoV matrix, positioning map, battlecards (the headline deliverable) |
-| 2 | Discover competitors | Identify & tier the real competitor set |
-| 3 | Positioning & messaging | Messaging matrix + positioning 2×2 + white space |
-| 4 | Website & conversion | Funnel, offers, pricing, proof, lead capture |
-| 5 | Content engine | Cadence, topics, share-of-search, content gaps |
-| 6 | Paid media | Ad-library creative & offer intelligence |
-| 7 | Social & share-of-voice | Platforms, scale, engagement, themes |
-| 8 | Sales battlecard | Rep-ready battlecard for one competitor |
-| 9 | Monitor | Stand up a recurring competitive watch |
+> **What are you looking to do today?**
 
-**Coming soon (roadmap — mention, don't offer):** Positioning Studio · Content
-Engine · Paid-Media Lab · Lifecycle & Email · Brand & PR. Vantage is built as a hub;
-more marketing packs slot in here over time.
+Then, briefly, orient them with what Vantage can do (a light menu — this is still the
+single Q1, not a dump of intake questions):
 
-### Step 3 — Guided intake (pre-questions)
+- **Full competitive landscape** — the complete teardown + report (most popular)
+- **Find my competitors** — discover & tier the real set
+- **Positioning & messaging** — how rivals position, where the white space is
+- **Website / paid ads / content / social** — a single-channel teardown
+- **Sales battlecard** — how to beat one specific competitor
+- **Monitor** — keep watch on competitors over time
 
-Before running, gather just enough to do it well. Ask only what's missing. Prefer
-`AskUserQuestion` for the structured choices; ask for the domain in plain text.
+Wait for their answer, then route to the matching skill and continue the interview.
 
-For a **Full landscape** (the common path):
-1. **Your brand / domain** — plain text if not already given.
-2. **Competitor set** — "Auto-discover them, or do you have a list?" (if a list,
-   collect it).
-3. **Audience emphasis** — Growth/marketing · Sales · Both. (Shapes whether the
-   "so what" leans positioning/channel moves vs battlecard ammo.)
-4. **Depth** — Quick (top 3, headlines) · Standard (5–7, full) · Deep (7+, exhaustive).
-5. **Any specific angle?** — optional (a segment, a launch, a rival to focus on).
+### Step 3 — Follow-up questions (one at a time, only what's needed)
+
+Branch on what they chose. Ask each as its **own message**, waiting between each.
+For the **Full competitive landscape** (the common path), ask in this order:
+
+1. **"What's your brand or website?"** (the subject to analyze)
+2. **"Who are your main competitors — or want me to find them for you?"**
+   (if they have a list, take it; else plan to run `vantage-discover`)
+3. **"Who's this for — marketing/growth, sales, or both?"**
+   (shapes whether the "so what" leans positioning moves vs battlecard ammo)
+4. **"How deep should I go — quick scan (top 3), standard (5–7), or deep dive (7+)?"**
+5. **"Anything specific you want me to zero in on?"** (optional — a segment, a launch,
+   a rival; accept "nope")
 
 For a single-skill pick, ask only that skill's essentials (e.g. battlecard → which
-competitor + your brand; ads → which domains).
+competitor + your brand; ads → which domains). Always one question per message.
 
-### Step 4 — Dispatch & deliver
+### Step 4 — Confirm, run, deliver
 
-- Load the matching specialist skill and run it with the gathered inputs:
-  Full landscape → orchestrate all (see "Orchestration" below); else →
-  `vantage-discover` · `vantage-positioning` · `vantage-website` · `vantage-content`
-  · `vantage-ads` · `vantage-social` · `vantage-battlecard` · `vantage-monitor`.
-- Produce the **HTML report** (see `references/html-report.md`), `open` it, and offer
-  to stand up `vantage-monitor`.
+- Give a one-line recap of what you're about to do ("Got it — full landscape on
+  ACME vs 5 competitors, sales-focused, standard depth. Running now.") and go.
+- Execute (see Orchestration). Produce the **HTML report** (`references/html-report.md`),
+  `open` it, and offer to stand up `vantage-monitor`.
 
 ## Orchestration (Full landscape)
 
