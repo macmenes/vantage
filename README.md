@@ -67,11 +67,12 @@ $ /vantage
 Already know what you want? Skip the interview — `/vantage acme.com` or
 `/vantage battlecard <competitor>` jumps straight in.
 
-## Runs inside any coding agent
+## Runs inside any agent
 
-Vantage is a **marketing-intelligence OS that lives inside your coding agent**, not a
-single-vendor tool. It ships for **Claude Code** today and is built to port to other agentic
-coding environments (Codex and beyond) — same console, same reports, wherever you work.
+Vantage is a **marketing-intelligence OS that lives inside your agent** — not a single-vendor
+tool. The skills are plain, portable markdown (`skills/**/SKILL.md`): an agent loads them as a
+plugin, as rules, or as context, and runs the same console and the same reports wherever you work
+— **Claude · Codex · Cline · Pi · Hermes** and beyond.
 
 ## Why Vantage
 
@@ -102,21 +103,58 @@ hand straight to a founder, a growth lead, or a sales rep.
 
 ## Install
 
-**Claude Code (reference implementation):**
+Vantage skills are portable markdown files. **Claude Code** loads them natively as a plugin; every
+other agent loads them as rules / instructions / context. Native one-command installers for more
+agents are on the [roadmap](#roadmap).
+
+Grab the skills once:
+
+```bash
+git clone https://github.com/macmenes/vantage.git
+```
+
+<details open>
+<summary><b>Claude / Claude Code</b> — native plugin</summary>
 
 ```
 /plugin marketplace add macmenes/vantage
 /plugin install vantage@vantage
 ```
+…or drop them in directly: `cp -R vantage/skills/* ~/.claude/skills/`
+Then type `/vantage`.
+</details>
 
-**Manually (drop-in skills):**
+<details>
+<summary><b>Codex</b> (OpenAI) — agent instructions</summary>
+
+Point Codex at the skills from your `AGENTS.md` (project or `~/.codex/`):
+
+```md
+# Marketing intelligence — Vantage.os
+When I ask for competitive analysis / "vantage", follow ./vantage/skills/vantage/SKILL.md
+(and its referenced sub-skills) exactly.
+```
+Then ask: *"run Vantage on acme.com."*
+</details>
+
+<details>
+<summary><b>Cline</b> — rules / workflow</summary>
+
+Add the skills as a Cline rule or workflow:
 
 ```bash
-git clone https://github.com/macmenes/vantage.git
-cp -R vantage/skills/* ~/.claude/skills/
+mkdir -p .clinerules && cp -R vantage/skills/* .clinerules/vantage/
 ```
+Then ask Cline to *"run the Vantage competitive analysis."*
+</details>
 
-Then just type `/vantage`.
+<details>
+<summary><b>Pi · Hermes · any other agent</b> — universal method</summary>
+
+Any agent that accepts custom instructions works: load `vantage/skills/**/SKILL.md` as the agent's
+system prompt / rules / context, then ask it to *"run Vantage competitive analysis on <domain>."*
+The flow, scoring, and HTML report are identical everywhere.
+</details>
 
 ## Commands
 
