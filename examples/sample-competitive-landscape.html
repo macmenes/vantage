@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Competitive Landscape — Northpeak (Sample)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ DESIGN TOKENS (reusable across reports) ============ */
+  :root{
+    --ink:#0c0d10;          /* near-black text */
+    --ink-2:#3a3d44;        /* secondary text */
+    --ink-3:#73767e;        /* muted */
+    --line:#e7e5e0;         /* hairlines */
+    --line-2:#efede8;
+    --paper:#fbfaf7;        /* warm off-white */
+    --card:#ffffff;
+    --accent:#0c0d10;       /* chrome accent = ink (monochrome, design-forward) */
+    --accent-soft:#f2f1ec;
+    /* data heatmap scale (only place color is allowed) */
+    --b-dominant:#0f5c3f;   --b-dominant-bg:#e4f0ea;
+    --b-strong:#2f7d54;     --b-strong-bg:#ebf3ee;
+    --b-credible:#9a7b1f;   --b-credible-bg:#f6f0dd;
+    --b-thin:#b5631f;       --b-thin-bg:#f7e9dd;
+    --b-absent:#9a3b34;     --b-absent-bg:#f5e2e0;
+    --crit:#9a3b34; --crit-bg:#f6e4e2;
+    --high:#9a6a1f; --high-bg:#f7eedd;
+    --med:#41515f;  --med-bg:#e9edf0;
+    --shadow:0 1px 2px rgba(12,13,16,.04), 0 8px 30px rgba(12,13,16,.05);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:15.5px;line-height:1.62;font-feature-settings:"cv05","ss01","tnum";
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+  h1,h2,h3,h4{font-weight:600;letter-spacing:-.02em;line-height:1.18;color:var(--ink)}
+  .serif{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.01em}
+  a{color:inherit}
+  .tnum{font-variant-numeric:tabular-nums}
+  .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+  /* ============ TOP NAV ============ */
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.82);
+    backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:8px;height:58px}
+  nav .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.02em;margin-right:auto}
+  nav .brand .mk{width:24px;height:24px;border-radius:7px;overflow:hidden;display:block}
+  nav .links{display:flex;gap:4px}
+  nav .links a{font-size:13px;color:var(--ink-2);text-decoration:none;padding:7px 11px;border-radius:8px;font-weight:500}
+  nav .links a:hover{background:var(--accent-soft);color:var(--ink)}
+  @media(max-width:780px){nav .links{display:none}}
+
+  /* ============ HERO ============ */
+  header.hero{padding:64px 0 30px}
+  .lockup{display:flex;align-items:center;gap:16px;margin-bottom:30px}
+  .lockup .mk{width:60px;height:60px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);flex:none}
+  .lockup .mk svg{width:100%;height:100%;display:block}
+  .lockup .who{font-size:13px;color:var(--ink-3);line-height:1.4}
+  .lockup .who b{display:block;font-size:19px;color:var(--ink);font-weight:600;letter-spacing:-.02em}
+  h1.title{font-size:clamp(34px,5.4vw,56px);margin:0 0 14px;line-height:1.04}
+  .sub{font-size:16px;color:var(--ink-2);max-width:62ch;margin:0 0 22px}
+  .meta-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:12.5px;font-weight:500;color:var(--ink-2);background:var(--card);
+    border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+  .chip b{color:var(--ink);font-weight:600}
+
+  /* ============ SCORECARD ============ */
+  .scorecard{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;
+    background:var(--ink);color:#fff;border-radius:20px;padding:30px 34px;margin:34px 0 8px;
+    box-shadow:0 20px 50px rgba(12,13,16,.18)}
+  .scorecard .big{font-family:'Fraunces',serif;font-size:74px;font-weight:500;line-height:.9;letter-spacing:-.02em}
+  .scorecard .big small{font-size:26px;opacity:.55;font-weight:500}
+  .scorecard .meta{display:flex;flex-direction:column;gap:3px}
+  .scorecard .meta .k{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+  .scorecard .rankrow{display:flex;gap:34px;flex-wrap:wrap}
+  .scorecard .rankrow div span{display:block}
+  .scorecard .v{font-size:21px;font-weight:600;letter-spacing:-.01em;margin-top:2px}
+  .scorecard .note{font-size:13px;color:rgba(255,255,255,.62);max-width:46ch;margin-top:6px;line-height:1.5}
+  @media(max-width:620px){.scorecard{grid-template-columns:1fr;gap:18px;text-align:left}}
+
+  /* ============ SECTIONS ============ */
+  section{padding:46px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .sec-head .no{font-family:'Fraunces',serif;font-size:15px;color:var(--ink-3);font-weight:500;width:30px;flex:none}
+  .sec-head h2{font-size:27px;margin:0}
+  .sec-head .h-sub{font-size:14px;color:var(--ink-3);margin-left:auto;text-align:right}
+
+  /* cards & callouts */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:740px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .card .label{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .card p{margin:0;font-size:14.5px;color:var(--ink-2)}
+  .card p b,.card p strong{color:var(--ink)}
+  .dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+  .callout{background:var(--accent-soft);border:1px solid var(--line);border-left:3px solid var(--ink);
+    border-radius:10px;padding:14px 18px;font-size:14.5px;color:var(--ink-2);margin-top:16px}
+  .callout b{color:var(--ink)}
+  .so-what{border-left-color:var(--b-strong)}
+  .so-what .tag{font-weight:600;color:var(--b-strong);letter-spacing:.04em;text-transform:uppercase;font-size:11px;margin-right:6px}
+
+  /* moves list */
+  ol.moves{list-style:none;counter-reset:m;padding:0;margin:18px 0 0;display:grid;gap:12px}
+  ol.moves li{counter-increment:m;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  ol.moves li::before{content:counter(m);font-family:'Fraunces',serif;font-size:20px;color:#fff;background:var(--ink);
+    width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-weight:500}
+  ol.moves li b{color:var(--ink)}
+
+  /* ============ TABLES ============ */
+  .tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;font-size:13.8px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top}
+  thead th{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:600;background:#faf9f6;position:sticky;top:0}
+  tbody tr:last-child td{border-bottom:none}
+  td b,td strong{color:var(--ink)}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.subject{background:#fcfbf4}
+  tr.subject td{font-weight:500}
+  tr.subject td:first-child{box-shadow:inset 3px 0 0 var(--ink)}
+
+  /* score heatmap cell */
+  .score{display:inline-flex;align-items:center;justify-content:center;min-width:42px;
+    padding:4px 9px;border-radius:7px;font-weight:600;font-variant-numeric:tabular-nums;font-size:13.5px}
+  .dominant{color:var(--b-dominant);background:var(--b-dominant-bg)}
+  .strong{color:var(--b-strong);background:var(--b-strong-bg)}
+  .credible{color:var(--b-credible);background:var(--b-credible-bg)}
+  .thin{color:var(--b-thin);background:var(--b-thin-bg)}
+  .absent{color:var(--b-absent);background:var(--b-absent-bg)}
+  .dsov-total{font-family:'Fraunces',serif;font-size:18px;font-weight:500}
+
+  /* tier badge */
+  .tier{font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap}
+  .t-direct{background:#eceaf6;color:#4b3f86}
+  .t-adjacent{background:#eaf0f3;color:#3a5867}
+  .t-subject{background:var(--ink);color:#fff}
+
+  /* band legend */
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:12px;color:var(--ink-3)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+  /* ============ POSITIONING MAP ============ */
+  .map-wrap{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:0;margin-top:6px}
+  .map{position:relative;aspect-ratio:1.45/1;margin:0}
+  .map .axis-x,.map .axis-y{position:absolute;background:var(--line)}
+  .map .axis-x{left:8%;right:8%;top:50%;height:1px}
+  .map .axis-y{top:9%;bottom:13%;left:50%;width:1px}
+  .map .arrow{position:absolute;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .ax-top{top:10px;left:50%;transform:translateX(-50%)}
+  .ax-bottom{bottom:8px;left:50%;transform:translateX(-50%)}
+  .ax-left{left:14px;top:50%;transform:translateY(-50%) rotate(0)}
+  .ax-right{right:14px;top:50%;transform:translateY(-50%);text-align:right}
+  .quad-empty{position:absolute;right:9%;bottom:15%;width:33%;text-align:center;color:var(--ink-3);font-size:12px;
+    border:1px dashed var(--line);border-radius:10px;padding:14px 8px;background:repeating-linear-gradient(135deg,transparent,transparent 7px,#f6f5f1 7px,#f6f5f1 8px)}
+  .pt{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:5px}
+  .pt .d{width:13px;height:13px;border-radius:50%;background:var(--ink-3);border:2px solid var(--paper);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+  .pt .l{font-size:12px;font-weight:500;color:var(--ink-2);white-space:nowrap}
+  .pt.us .d{width:18px;height:18px;background:var(--ink)}
+  .pt.us .l{font-weight:700;color:var(--ink)}
+
+  /* channel finding header */
+  .channel{margin-top:22px}
+  .channel:first-of-type{margin-top:0}
+  .channel-h{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .channel-h h3{font-size:19px;margin:0}
+  .band-pill{margin-left:auto;font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px}
+
+  /* threats / whitespace */
+  ul.clean{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+  ul.clean li{display:grid;grid-template-columns:auto 1fr;gap:11px;font-size:14.5px;color:var(--ink-2)}
+  ul.clean li .mk{flex:none;margin-top:8px}
+  ul.clean li b{color:var(--ink)}
+  .lead{width:7px;height:7px;border-radius:50%;margin-top:8px}
+
+  /* priority table */
+  .prio{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:6px;white-space:nowrap}
+  .p-crit{background:var(--crit-bg);color:var(--crit)}
+  .p-high{background:var(--high-bg);color:var(--high)}
+  .p-med{background:var(--med-bg);color:var(--med)}
+
+  /* ============ BATTLECARDS ============ */
+  .bcard{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);
+    padding:26px 28px;margin-top:20px;overflow:hidden}
+  .bcard .top{display:flex;align-items:flex-start;gap:14px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+  .bcard .top .nm{font-size:21px;font-weight:600;letter-spacing:-.02em}
+  .bcard .top .upd{font-size:12px;color:var(--ink-3);margin-left:auto;white-space:nowrap}
+  .bcard .qt{font-size:14.5px;color:var(--ink-2);margin:0 0 18px}
+  .bcard .qt b{color:var(--ink)}
+  .steel{background:#faf9f6;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--ink-2);font-style:italic;margin-bottom:18px}
+  .steel .tag{font-style:normal;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:5px}
+  .winlose{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+  @media(max-width:680px){.winlose{grid-template-columns:1fr}}
+  .wl{border-radius:12px;padding:16px 18px}
+  .wl.win{background:var(--b-strong-bg);border:1px solid #d4e6da}
+  .wl.lose{background:var(--high-bg);border:1px solid #ecdcc1}
+  .wl h4{font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 11px}
+  .wl.win h4{color:var(--b-dominant)}
+  .wl.lose h4{color:var(--high)}
+  .wl ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .wl li{font-size:13.6px;color:var(--ink-2);padding-left:18px;position:relative}
+  .wl li::before{position:absolute;left:0;top:0}
+  .wl.win li::before{content:"✓";color:var(--b-strong);font-weight:700}
+  .wl.lose li::before{content:"→";color:var(--high);font-weight:700}
+  .wl li b{color:var(--ink)}
+  .wl li em{font-style:normal;color:var(--ink-3);font-size:12.5px}
+  .mini-h{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:18px 0 9px}
+  .landmines{display:grid;gap:8px}
+  .landmines div{font-size:13.6px;color:var(--ink-2);background:#faf9f6;border:1px solid var(--line);border-radius:9px;padding:10px 13px}
+  .dodont{display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;margin-top:16px}
+  .dodont b{color:var(--ink)}
+
+  details.evidence{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:8px}
+  details.evidence summary{cursor:pointer;padding:16px 20px;font-weight:600;font-size:14.5px;list-style:none;display:flex;align-items:center;gap:10px}
+  details.evidence summary::-webkit-details-marker{display:none}
+  details.evidence summary::before{content:"›";font-size:20px;color:var(--ink-3);transition:transform .2s}
+  details.evidence[open] summary::before{transform:rotate(90deg)}
+  details.evidence .tbl-scroll{border:none;border-top:1px solid var(--line);border-radius:0;box-shadow:none}
+  details.evidence td a{color:var(--ink-3);text-decoration:none;font-size:12px;word-break:break-all}
+  details.evidence td a:hover{color:var(--ink)}
+
+  .handoffs{font-size:13.5px;color:var(--ink-2)}
+  .handoffs code{background:var(--accent-soft);padding:1.5px 6px;border-radius:5px;font-size:12.5px;color:var(--ink)}
+
+  footer{padding:40px 0 64px;color:var(--ink-3);font-size:12.5px;border-top:1px solid var(--line);text-align:center}
+  footer .mk{width:20px;height:20px;border-radius:6px;overflow:hidden;display:inline-block;vertical-align:middle;margin:0 4px}
+
+  /* ============ PRINT ============ */
+  @media print{
+    nav{display:none}body{background:#fff;font-size:11px}
+    .wrap{max-width:none;padding:0 12mm}
+    section{padding:18px 0;break-inside:avoid}
+    .scorecard{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .card,.bcard,.tbl-scroll,.map-wrap{box-shadow:none;break-inside:avoid}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    a[href]::after{content:""}
+  }
+</style>
+</head>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">
+      <span class="mk"><svg viewBox="0 0 64 64" width="24" height="24"><rect width="64" height="64" rx="15" fill="#0c0d10"/><path d="M10 48 L24 24 L33 38 L40 28 L54 48 Z" fill="#fff"/></svg></span>
+      Northpeak · Competitive Landscape
+    </span>
+    <span class="links">
+      <a href="#summary">Summary</a>
+      <a href="#matrix">DSoV Matrix</a>
+      <a href="#map">Positioning</a>
+      <a href="#channels">Channels</a>
+      <a href="#actions">Actions</a>
+      <a href="#battlecards">Battlecards</a>
+    </span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="lockup">
+      <span class="mk"><svg viewBox="0 0 64 64" width="60" height="60"><rect width="64" height="64" rx="15" fill="#0c0d10"/><path d="M10 48 L24 24 L33 38 L40 28 L54 48 Z" fill="#fff"/></svg></span>
+      <span class="who"><b>Northpeak</b> northpeak.example</span>
+    </div>
+    <p class="eyebrow">Competitive Landscape Analysis · Sample</p>
+    <h1 class="title">How Northpeak stacks up in<br>revenue intelligence.</h1>
+    <p class="sub">A full-funnel digital-marketing teardown of Northpeak against five rivals — positioning, content, website, paid, social, and reputation — rolled into a single Digital Share-of-Voice index, with sales battlecards for the two most contested deals.</p>
+    <div class="meta-chips">
+      <span class="chip"><b>Category</b>&nbsp; Revenue intelligence platform</span>
+      <span class="chip"><b>Audience</b>&nbsp; Growth + Sales</span>
+      <span class="chip" style="background:#fdf3e6;border-color:#ecd9b6"><b>⚠ Illustrative sample</b>&nbsp; fictional companies &amp; data</span>
+    </div>
+
+    <div class="scorecard">
+      <div><div class="big tnum">68<small>/100</small></div></div>
+      <div class="meta">
+        <div class="rankrow">
+          <div><span class="k">Digital Share of Voice</span><span class="v">Rank 3 of 6</span></div>
+          <div><span class="k">Behind</span><span class="v">Cobalt (75)</span></div>
+          <div><span class="k">Strongest channel</span><span class="v">Positioning · 80</span></div>
+          <div><span class="k">Weakest channel</span><span class="v">Paid · 45</span></div>
+        </div>
+        <p class="note">Best-in-class onboarding and a sharp self-serve story — but out-spent on paid, out-published by Beacon, and thin on third-party review proof.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section id="summary">
+    <div class="sec-head"><span class="no">01</span><h2>Executive Summary</h2><span class="h-sub">5 rivals deep-dived<br>+ long tail</span></div>
+    <div class="grid g2">
+      <div class="card">
+        <div class="label"><span class="dot" style="background:var(--crit)"></span>Biggest Threat</div>
+        <p><b>Cobalt</b> — the category leader. Broadest platform, strongest brand, and the only rival running a serious paid-media engine across every channel. It sets the agenda the rest of the set reacts to.</p>
+      </div>
+      <div class="card">
+        <div class="label"><span class="dot" style="background:var(--b-strong)"></span>Biggest Opening — White Space</div>
+        <p><b>Self-serve mid-market, onboarding-led.</b> Cobalt and Orrery skew enterprise and heavy; Cinder is cheap but thin. Nobody owns <b>"powerful revenue intelligence you can stand up in a day, without the enterprise tax."</b> That is Northpeak's defensible lane.</p>
+      </div>
+    </div>
+    <ol class="moves">
+      <li><div><b>Own the time-to-value story.</b> Make "live in a day" the hero message across the site, ads, and sales — it's the one axis where Northpeak beats every rival and the buyer feels it immediately.</div></li>
+      <li><div><b>Close the review-proof gap.</b> Northpeak has happy customers but a near-empty G2/Capterra presence — a direct conversion and battlecard liability. Run a structured review drive.</div></li>
+      <li><div><b>Pick one content lane and win it.</b> Don't out-volume Beacon — out-depth them on a single buyer-critical topic cluster tied to onboarding/activation.</div></li>
+    </ol>
+  </section>
+
+  <section id="set">
+    <div class="sec-head"><span class="no">02</span><h2>The Competitive Set</h2></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Competitor</th><th>Tier</th><th>Why they're in the set</th><th class="num">DSoV</th></tr></thead>
+        <tbody>
+          <tr class="subject"><td><b>Northpeak</b></td><td><span class="tier t-subject">Subject</span></td><td>Self-serve revenue intelligence; fastest onboarding in the set</td><td class="num"><b>68</b></td></tr>
+          <tr><td><b>Cobalt</b></td><td><span class="tier t-direct">Direct</span></td><td>Category leader — broadest platform, biggest brand, full-funnel paid engine</td><td class="num">75</td></tr>
+          <tr><td><b>Beacon</b></td><td><span class="tier t-direct">Direct</span></td><td>Content & community powerhouse; strong inbound and share-of-voice</td><td class="num">71</td></tr>
+          <tr><td><b>Vireo</b></td><td><span class="tier t-direct">Direct</span></td><td>Fast-growing challenger; aggressive paid media and pricing</td><td class="num">64</td></tr>
+          <tr><td><b>Orrery</b></td><td><span class="tier t-adjacent">Adjacent</span></td><td>Enterprise-only, sales-led, opaque pricing — a different buyer</td><td class="num">58</td></tr>
+          <tr><td><b>Cinder</b></td><td><span class="tier t-adjacent">Adjacent</span></td><td>Low-cost SMB tool; broad but shallow, light on proof</td><td class="num">49</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="callout"><b>Long tail (not deep-dived):</b> spreadsheets &amp; the "do-nothing" status quo (the real competitor for many mid-market deals), plus two early-stage entrants worth watching.</p>
+  </section>
+
+  <section id="matrix">
+    <div class="sec-head"><span class="no">03</span><h2>DSoV Matrix</h2><span class="h-sub">Each cell scored 0–100<br>vs ≥3 cited signals</span></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr>
+          <th>Brand</th><th class="num">Pos.<br><small>20%</small></th><th class="num">Content<br><small>20%</small></th>
+          <th class="num">Website<br><small>15%</small></th><th class="num">Paid<br><small>15%</small></th>
+          <th class="num">Social<br><small>15%</small></th><th class="num">Rep.<br><small>15%</small></th><th class="num">DSoV</th>
+        </tr></thead>
+        <tbody>
+          <tr class="subject"><td><b>Northpeak</b></td>
+            <td class="num"><span class="score strong">80</span></td><td class="num"><span class="score credible">60</span></td>
+            <td class="num"><span class="score strong">78</span></td><td class="num"><span class="score thin">45</span></td>
+            <td class="num"><span class="score credible">55</span></td><td class="num"><span class="score strong">72</span></td>
+            <td class="num"><span class="dsov-total">68</span></td></tr>
+          <tr><td>Cobalt</td>
+            <td class="num"><span class="score strong">78</span></td><td class="num"><span class="score strong">82</span></td>
+            <td class="num"><span class="score strong">80</span></td><td class="num"><span class="score strong">70</span></td>
+            <td class="num"><span class="score strong">78</span></td><td class="num"><span class="score strong">80</span></td>
+            <td class="num"><span class="dsov-total">75</span></td></tr>
+          <tr><td>Beacon</td>
+            <td class="num"><span class="score strong">72</span></td><td class="num"><span class="score dominant">85</span></td>
+            <td class="num"><span class="score strong">75</span></td><td class="num"><span class="score credible">55</span></td>
+            <td class="num"><span class="score strong">82</span></td><td class="num"><span class="score strong">72</span></td>
+            <td class="num"><span class="dsov-total">71</span></td></tr>
+          <tr><td>Vireo</td>
+            <td class="num"><span class="score credible">68</span></td><td class="num"><span class="score credible">65</span></td>
+            <td class="num"><span class="score strong">72</span></td><td class="num"><span class="score strong">80</span></td>
+            <td class="num"><span class="score strong">70</span></td><td class="num"><span class="score credible">55</span></td>
+            <td class="num"><span class="dsov-total">64</span></td></tr>
+          <tr><td>Orrery</td>
+            <td class="num"><span class="score strong">70</span></td><td class="num"><span class="score credible">50</span></td>
+            <td class="num"><span class="score credible">65</span></td><td class="num"><span class="score thin">40</span></td>
+            <td class="num"><span class="score thin">45</span></td><td class="num"><span class="score credible">68</span></td>
+            <td class="num"><span class="dsov-total">58</span></td></tr>
+          <tr><td>Cinder</td>
+            <td class="num"><span class="score credible">55</span></td><td class="num"><span class="score thin">45</span></td>
+            <td class="num"><span class="score credible">60</span></td><td class="num"><span class="score credible">50</span></td>
+            <td class="num"><span class="score thin">48</span></td><td class="num"><span class="score credible">50</span></td>
+            <td class="num"><span class="dsov-total">49</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="legend">
+      <span><i style="background:var(--b-dominant-bg);border:1px solid var(--b-dominant)"></i> Dominant 85+</span>
+      <span><i style="background:var(--b-strong-bg);border:1px solid var(--b-strong)"></i> Strong 70–84</span>
+      <span><i style="background:var(--b-credible-bg);border:1px solid var(--b-credible)"></i> Credible 50–69</span>
+      <span><i style="background:var(--b-thin-bg);border:1px solid var(--b-thin)"></i> Thin 30–49</span>
+      <span><i style="background:var(--b-absent-bg);border:1px solid var(--b-absent)"></i> Absent &lt;30</span>
+    </div>
+    <p class="callout"><b>Read of the gaps:</b> Northpeak is <b>Strong on Positioning &amp; Website</b> but <b>Thin on Paid</b> and only mid-pack on <b>Content</b> and <b>Social</b> — exactly where Cobalt and Beacon pull ahead. The race is decided by <b>distribution and proof, not product.</b></p>
+  </section>
+
+  <section id="map">
+    <div class="sec-head"><span class="no">04</span><h2>Positioning Map</h2><span class="h-sub">SMB / self-serve ⟷ Enterprise&nbsp;&nbsp;×&nbsp;&nbsp;Point solution ⟷ Full platform</span></div>
+    <div class="map-wrap">
+      <div class="map">
+        <div class="axis-x"></div><div class="axis-y"></div>
+        <span class="arrow ax-top">Full platform</span>
+        <span class="arrow ax-bottom">Point solution</span>
+        <span class="arrow ax-left">SMB /<br>self-serve</span>
+        <span class="arrow ax-right">Enterprise /<br>sales-led</span>
+        <div class="quad-empty">Empty quadrant —<br>enterprise buyers who want one simple point solution</div>
+        <div class="pt us" style="left:40%;top:40%"><span class="d"></span><span class="l">Northpeak</span></div>
+        <div class="pt"    style="left:72%;top:22%"><span class="d"></span><span class="l">Cobalt</span></div>
+        <div class="pt"    style="left:50%;top:28%"><span class="d"></span><span class="l">Beacon</span></div>
+        <div class="pt"    style="left:84%;top:42%"><span class="d"></span><span class="l">Orrery</span></div>
+        <div class="pt"    style="left:38%;top:58%"><span class="d"></span><span class="l">Vireo</span></div>
+        <div class="pt"    style="left:24%;top:76%"><span class="d"></span><span class="l">Cinder</span></div>
+      </div>
+    </div>
+    <p class="callout so-what"><span class="tag">So what</span> Northpeak owns the <b>powerful-but-self-serve</b> middle. Cobalt and Orrery are dragging up-market into enterprise complexity; Cinder is stuck at the cheap/shallow bottom. Northpeak's wedge is the buyer who wants real platform depth <b>without</b> a sales cycle and a six-week rollout.</p>
+  </section>
+
+  <section id="channels">
+    <div class="sec-head"><span class="no">05</span><h2>Channel Findings</h2></div>
+
+    <div class="channel">
+      <div class="channel-h"><h3>Positioning &amp; Messaging</h3><span class="band-pill strong">Strong · 80</span></div>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Element</th><th>Northpeak</th><th>Cobalt</th><th>Beacon</th></tr></thead>
+          <tbody>
+            <tr><td><b>One-liner</b></td><td>"Revenue intelligence, live in a day."</td><td>"The complete revenue platform"</td><td>"Where revenue teams learn to win"</td></tr>
+            <tr><td><b>Named ICP</b></td><td>Mid-market revenue teams</td><td>Enterprise RevOps</td><td>Sales leaders &amp; RevOps</td></tr>
+            <tr><td><b>Differentiator</b></td><td>Speed to value, self-serve depth</td><td>Breadth + ecosystem</td><td>Content, community, methodology</td></tr>
+            <tr><td><b>Primary proof</b></td><td>Onboarding time, NPS</td><td>Logos + analyst placement</td><td>Audience size + thought leadership</td></tr>
+            <tr><td><b>Tone</b></td><td>Pragmatic, fast, confident</td><td>Enterprise, authoritative</td><td>Educational, community-led</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="callout"><b>Shared clichés (avoid):</b> "complete platform," "single source of truth," "AI-powered." &nbsp;<b>Uncontested ground:</b> <i>"enterprise-grade depth, self-serve speed."</i></p>
+      <p class="callout so-what"><span class="tag">So what</span> Positioning is Northpeak's strongest asset — sharpen it. Lead every surface with the time-to-value claim the rivals structurally can't match.</p>
+    </div>
+
+    <div class="channel">
+      <div class="channel-h"><h3>Content Engine</h3><span class="band-pill credible">Credible · 60</span></div>
+      <div class="grid g3">
+        <div class="card"><div class="label">Cadence</div><p>~2 posts/month, consistent but modest. Beacon publishes ~3× the volume with a dedicated media brand.</p></div>
+        <div class="card"><div class="label">Opportunity</div><p>No clear pillar Northpeak owns. An <b>activation/onboarding</b> cluster maps directly to its differentiator and is under-served by the set.</p></div>
+        <div class="card"><div class="label">The Gap</div><p>Beacon captures most "how-to" buyer search. Northpeak cedes that intent today.</p></div>
+      </div>
+      <p class="callout so-what"><span class="tag">So what</span> Don't fight Beacon on volume. Win one focused cluster with depth, original data, and tie every piece to the product's fast-activation story.</p>
+    </div>
+
+    <div class="channel">
+      <div class="channel-h"><h3>Website &amp; Conversion</h3><span class="band-pill strong">Strong · 78</span></div>
+      <div class="grid g3">
+        <div class="card"><div class="label">Funnel</div><p>Clean self-serve signup + transparent pricing. Lower friction than Cobalt/Orrery's "contact sales" gates.</p></div>
+        <div class="card"><div class="label">Edge</div><p>An interactive ROI/time-to-value calculator would weaponize the core differentiator at the point of decision.</p></div>
+        <div class="card"><div class="label">Proof density</div><p>Light on quantified case studies vs Cobalt's logo wall — the conversion gap to close.</p></div>
+      </div>
+      <p class="callout so-what"><span class="tag">So what</span> The self-serve funnel is a genuine advantage over the enterprise rivals — surface quantified onboarding outcomes as hero proof.</p>
+    </div>
+
+    <div class="channel">
+      <div class="channel-h"><h3>Paid Media</h3><span class="band-pill thin">Thin · 45 · low confidence</span></div>
+      <p style="color:var(--ink-2);font-size:14.5px;margin:4px 0 0">Limited visible footprint in public ad libraries vs <b>Cobalt</b> (always-on, multi-channel) and <b>Vireo</b> (aggressive, comparison-led). Northpeak appears to lean organic/self-serve.</p>
+      <p class="callout" style="border-left-color:var(--b-thin)"><b>⚠ Blind spot:</b> Search text ads and some networks aren't fully visible — verify in Meta Ad Library + Google Ads Transparency before treating as fact.</p>
+      <p class="callout so-what"><span class="tag">So what</span> A focused retargeting test around the time-to-value message is untapped — but build review proof first so paid clicks convert.</p>
+    </div>
+
+    <div class="channel">
+      <div class="channel-h"><h3>Social &amp; Community</h3><span class="band-pill credible">Credible · 55</span></div>
+      <p style="color:var(--ink-2);font-size:14.5px;margin:4px 0 0">Beacon leads on owned community and founder-led distribution; Cobalt on scale. Northpeak's presence is on-brand but under-scaled, with no owned community yet.</p>
+      <p class="callout so-what"><span class="tag">So what</span> Can't out-scale Beacon. Can build a tight practitioner community around fast activation — engagement quality over follower count.</p>
+    </div>
+
+    <div class="channel">
+      <div class="channel-h"><h3>Reputation &amp; Proof</h3><span class="band-pill strong">Strong-ish · 72</span></div>
+      <div class="grid g2">
+        <div class="card"><div class="label"><span class="dot" style="background:var(--b-strong)"></span>Strength</div><p>High satisfaction and strong word-of-mouth among existing customers; clean, credible brand.</p></div>
+        <div class="card"><div class="label"><span class="dot" style="background:var(--crit)"></span>Critical Gap</div><p><b>Near-empty third-party review presence</b> (G2/Capterra) vs Cobalt's hundreds. Happy customers, but nobody's been asked to review.</p></div>
+      </div>
+      <p class="callout so-what"><span class="tag">So what</span> The most actionable gap in the report — a structured review drive turns existing goodwill into conversion lift and battlecard ammunition.</p>
+    </div>
+  </section>
+
+  <section id="threats">
+    <div class="sec-head"><span class="no">06</span><h2>White Space &amp; Threats</h2></div>
+    <div class="grid g2">
+      <div class="card">
+        <div class="label"><span class="dot" style="background:var(--b-strong)"></span>White space — own it</div>
+        <ul class="clean" style="margin-top:8px">
+          <li><span class="lead" style="background:var(--b-strong)"></span><span><b>Powerful-but-self-serve mid-market</b> — platform depth without the enterprise tax. No rival credibly holds it.</span></li>
+          <li><span class="lead" style="background:var(--b-strong)"></span><span><b>Time-to-value as a category claim</b> — "live in a day," proven with onboarding data.</span></li>
+          <li><span class="lead" style="background:var(--b-strong)"></span><span><b>Activation/onboarding content cluster</b> — under-served by the set and on-message.</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="label"><span class="dot" style="background:var(--crit)"></span>Threats</div>
+        <ul class="clean" style="margin-top:8px">
+          <li><span class="lead" style="background:var(--crit)"></span><span><b>Cobalt's brand + paid engine</b> — sets the agenda and out-spends on demand-gen.</span></li>
+          <li><span class="lead" style="background:var(--high)"></span><span><b>Beacon's content/community flywheel</b> — captures buyer-intent search Northpeak cedes.</span></li>
+          <li><span class="lead" style="background:var(--high)"></span><span><b>Vireo's aggressive, comparison-led paid</b> — directly targets challengers like Northpeak.</span></li>
+          <li><span class="lead" style="background:var(--med)"></span><span><b>Empty review shelf</b> — unaddressed, it caps conversion and arms every rival.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="actions">
+    <div class="sec-head"><span class="no">07</span><h2>Prioritized Action Plan</h2></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th style="width:34px">#</th><th>Move</th><th>Channel</th><th>Why now</th><th>Effort</th><th>Priority</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td><b>Make "live in a day" the hero claim</b> across site, ads, and sales</td><td>Positioning</td><td>The one axis Northpeak beats every rival on</td><td>Med</td><td><span class="prio p-crit">Critical</span></td></tr>
+          <tr><td>2</td><td><b>Launch a G2/Capterra review drive</b> from happy customers</td><td>Reputation</td><td>Glaring proof gap; lifts conversion + arms sales</td><td>Low</td><td><span class="prio p-crit">Critical</span></td></tr>
+          <tr><td>3</td><td>Ship an <b>interactive time-to-value / ROI calculator</b></td><td>Website</td><td>Weaponizes the differentiator at the decision point</td><td>Med</td><td><span class="prio p-high">High</span></td></tr>
+          <tr><td>4</td><td><b>Own one content cluster</b> (activation/onboarding) with depth + data</td><td>Content</td><td>Beacon cedes no ground on volume — win on focus</td><td>Med</td><td><span class="prio p-high">High</span></td></tr>
+          <tr><td>5</td><td><b>Verify + test paid</b> retargeting on the time-to-value message</td><td>Paid</td><td>Untapped, but only after review proof exists</td><td>Med</td><td><span class="prio p-med">Medium</span></td></tr>
+          <tr><td>6</td><td>Seed a <b>practitioner community</b> around fast activation</td><td>Social</td><td>Can't out-scale Beacon; can out-engage</td><td>Med</td><td><span class="prio p-med">Medium</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="battlecards">
+    <div class="sec-head"><span class="no">08</span><h2>Sales Battlecards</h2><span class="h-sub">For the two most<br>contested deals</span></div>
+
+    <div class="bcard">
+      <div class="top"><div><div class="nm">vs. Cobalt</div></div><span class="upd">Sample · fictional</span></div>
+      <p class="qt"><b>Quick take:</b> The category leader — broadest platform, biggest brand. We meet them in every mid-market evaluation that "went up-market to look at the leader." <b>We win on speed-to-value, price-to-value, and self-serve fit; they win on breadth and brand safety.</b></p>
+      <div class="steel"><span class="tag">Their pitch (steelman)</span>"The complete, enterprise-grade revenue platform — every integration, analyst-recognized, trusted by the biggest teams. One vendor for everything."</div>
+      <div class="winlose">
+        <div class="wl win">
+          <h4>Why we win</h4>
+          <ul>
+            <li><b>Live in a day, not a quarter</b> — self-serve onboarding vs a multi-week implementation. <em>buyers feel time-to-value immediately</em></li>
+            <li><b>Price-to-value for mid-market</b> — you pay for depth you'll use, not enterprise modules you won't.</li>
+            <li><b>No sales-gate to evaluate</b> — start free, prove it yourself.</li>
+          </ul>
+        </div>
+        <div class="wl lose">
+          <h4>Where they win — & our response</h4>
+          <ul>
+            <li><b>Breadth &amp; ecosystem.</b> <em>Response: most mid-market teams use a fraction of it — we cover what you actually need, faster.</em></li>
+            <li><b>Brand safety ("nobody got fired…").</b> <em>Response: de-risk with a free self-serve trial — proof beats reputation.</em></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mini-h">Landmines to set</div>
+      <div class="landmines">
+        <div>"Ask them what real onboarding looks like — timeline, services fees, and who does the work."</div>
+        <div>"Ask which modules are included at your tier vs add-ons at renewal."</div>
+      </div>
+      <div class="mini-h">Objection handling</div>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>They'll say</th><th>We respond</th></tr></thead>
+        <tbody>
+          <tr><td>"Cobalt does more"</td><td>"More than a mid-market team needs — and slower to value. We cover what you'll actually use, live in a day."</td></tr>
+          <tr><td>"Cobalt is the safe choice"</td><td>"Safe is proving it before you buy. Start free and judge the outcome, not the logo."</td></tr>
+        </tbody>
+      </table></div>
+      <div class="dodont"><span>✅ <b>Do</b> steer to time-to-value and total cost.</span><span>❌ <b>Don't</b> claim more breadth — we lose that and it's beside the point.</span></div>
+    </div>
+
+    <div class="bcard">
+      <div class="top"><div><div class="nm">vs. Beacon</div></div><span class="upd">Sample · fictional</span></div>
+      <p class="qt"><b>Quick take:</b> A content &amp; community powerhouse with strong inbound. We meet them when a buyer "read all their stuff." <b>We win on product depth and self-serve proof; they win on mindshare and methodology.</b></p>
+      <div class="steel"><span class="tag">Their pitch (steelman)</span>"The category's thought leader — the methodology, the community, the content. Buy from the team that's teaching the whole market."</div>
+      <div class="winlose">
+        <div class="wl win">
+          <h4>Why we win</h4>
+          <ul>
+            <li><b>The product, not just the playbook</b> — depth that executes the methodology, not only describes it.</li>
+            <li><b>Self-serve proof</b> — try it and see outcomes in days, no content-funnel nurture required.</li>
+          </ul>
+        </div>
+        <div class="wl lose">
+          <h4>Where they win — & our response</h4>
+          <ul>
+            <li><b>Mindshare &amp; community.</b> <em>Response: great content ≠ the best tool. Evaluate on outcomes in a trial, not blog volume.</em></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mini-h">Landmines to set</div>
+      <div class="landmines">
+        <div>"Ask how quickly their product delivers the outcome their content promises."</div>
+      </div>
+      <div class="mini-h">Objection handling</div>
+      <div class="tbl-scroll"><table>
+        <thead><tr><th>They'll say</th><th>We respond</th></tr></thead>
+        <tbody>
+          <tr><td>"Beacon knows this space best"</td><td>"They teach it well — we built the tool that does it fastest. Try both and compare time-to-value."</td></tr>
+        </tbody>
+      </table></div>
+      <div class="dodont"><span>✅ <b>Do</b> convert their education into our trial.</span><span>❌ <b>Don't</b> dismiss their content — respect it, then redirect to outcomes.</span></div>
+    </div>
+  </section>
+
+  <section id="appendix">
+    <div class="sec-head"><span class="no">09</span><h2>Evidence &amp; Hand-offs</h2></div>
+    <p class="handoffs" style="margin-bottom:18px">
+      <b>Hand-offs:</b>
+      deep keyword/organic data → <code>seo-dataforseo</code> ·
+      build "Northpeak vs Cobalt" comparison pages → <code>seo-competitor-pages</code> ·
+      backlink depth → <code>backlink-analyzer</code> ·
+      AI-search / GEO visibility → <code>seo-geo</code> ·
+      recurring tracking of this set → <code>vantage-monitor</code>.
+    </p>
+    <details class="evidence">
+      <summary>Evidence Log — illustrative sample (fictional sources)</summary>
+      <div class="tbl-scroll">
+        <table>
+          <thead><tr><th>Claim</th><th>Source</th><th>Captured</th></tr></thead>
+          <tbody>
+            <tr><td>Northpeak hero, pricing, self-serve signup</td><td><a href="https://example.com">northpeak.example</a></td><td>sample</td></tr>
+            <tr><td>Cobalt platform breadth &amp; "contact sales" gate</td><td><a href="https://example.com">cobalt.example</a></td><td>sample</td></tr>
+            <tr><td>Beacon content cadence &amp; community</td><td><a href="https://example.com">beacon.example</a></td><td>sample</td></tr>
+            <tr><td>Ad footprints (Meta Ad Library / Google ATC)</td><td><a href="https://example.com">ad libraries</a></td><td>sample</td></tr>
+            <tr><td>Review counts (G2 / Capterra)</td><td><a href="https://example.com">review sites</a></td><td>sample</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+    <p class="callout" style="border-left-color:var(--b-thin);margin-top:18px"><b>This is an illustrative sample.</b> Northpeak, Cobalt, Beacon, Vireo, Orrery, and Cinder are fictional; the figures are for demonstration only. A real Vantage run cites live public sources with capture dates in every row.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="mk"><svg viewBox="0 0 64 64" width="20" height="20"><rect width="64" height="64" rx="15" fill="#0c0d10"/><path d="M10 48 L24 24 L33 38 L40 28 L54 48 Z" fill="#fff"/></svg></span>
+    Competitive Landscape (sample) · Generated by the <b>Vantage</b> skills pack · Illustrative fictional data
+  </div>
+</footer>
+
+</body>
+</html>

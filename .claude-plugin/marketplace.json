@@ -1,0 +1,46 @@
+{
+  "name": "vantage",
+  "owner": {
+    "name": "macmenes",
+    "url": "https://github.com/macmenes"
+  },
+  "metadata": {
+    "description": "Competitive landscape analysis skills for Claude Code — beautiful HTML competitive teardowns for marketing & sales.",
+    "version": "0.1.0",
+    "repository": "https://github.com/macmenes/vantage"
+  },
+  "plugins": [
+    {
+      "name": "vantage",
+      "source": ".",
+      "description": "Competitive landscape analysis for marketing & sales teams — Digital Share-of-Voice index, positioning map, competitive matrix, and sales battlecards, delivered as a single beautiful self-contained HTML report. Web-only, no API keys. 9 skills: an umbrella orchestrator plus discover, positioning, website, content, ads, social, battlecard, and monitor specialists.",
+      "version": "0.1.0",
+      "category": "marketing",
+      "tags": [
+        "competitive-analysis",
+        "competitive-intelligence",
+        "competitor-research",
+        "market-research",
+        "share-of-voice",
+        "positioning",
+        "battlecard",
+        "sales-enablement",
+        "marketing",
+        "growth",
+        "ad-library",
+        "go-to-market"
+      ],
+      "skills": [
+        "./skills/vantage",
+        "./skills/vantage-discover",
+        "./skills/vantage-positioning",
+        "./skills/vantage-website",
+        "./skills/vantage-content",
+        "./skills/vantage-ads",
+        "./skills/vantage-social",
+        "./skills/vantage-battlecard",
+        "./skills/vantage-monitor"
+      ]
+    }
+  ]
+}

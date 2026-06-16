@@ -1,0 +1,13 @@
+# macOS
+.DS_Store
+
+# Generated report outputs (the deliverable a run produces locally)
+COMPETITIVE-LANDSCAPE.html
+COMPETITIVE-LANDSCAPE.md
+COMPETITIVE-WATCH*.md
+
+# Editor / tooling
+.vscode/
+.idea/
+*.log
+node_modules/
