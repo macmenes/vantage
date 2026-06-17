@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northpeak · Lifecycle <title>Competitive Landscape — Northpeak (Sample)</title>amp; Email Flows (sample)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ DESIGN TOKENS (reusable across reports) ============ */
+  :root{
+    --ink:#0c0d10;          /* near-black text */
+    --ink-2:#3a3d44;        /* secondary text */
+    --ink-3:#73767e;        /* muted */
+    --line:#e7e5e0;         /* hairlines */
+    --line-2:#efede8;
+    --paper:#fbfaf7;        /* warm off-white */
+    --card:#ffffff;
+    --accent:#0c0d10;       /* chrome accent = ink (monochrome, design-forward) */
+    --accent-soft:#f2f1ec;
+    /* data heatmap scale (only place color is allowed) */
+    --b-dominant:#0f5c3f;   --b-dominant-bg:#e4f0ea;
+    --b-strong:#2f7d54;     --b-strong-bg:#ebf3ee;
+    --b-credible:#9a7b1f;   --b-credible-bg:#f6f0dd;
+    --b-thin:#b5631f;       --b-thin-bg:#f7e9dd;
+    --b-absent:#9a3b34;     --b-absent-bg:#f5e2e0;
+    --crit:#9a3b34; --crit-bg:#f6e4e2;
+    --high:#9a6a1f; --high-bg:#f7eedd;
+    --med:#41515f;  --med-bg:#e9edf0;
+    --shadow:0 1px 2px rgba(12,13,16,.04), 0 8px 30px rgba(12,13,16,.05);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:15.5px;line-height:1.62;font-feature-settings:"cv05","ss01","tnum";
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+  h1,h2,h3,h4{font-weight:600;letter-spacing:-.02em;line-height:1.18;color:var(--ink)}
+  .serif{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.01em}
+  a{color:inherit}
+  .tnum{font-variant-numeric:tabular-nums}
+  .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+  /* ============ TOP NAV ============ */
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.82);
+    backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:8px;height:58px}
+  nav .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.02em;margin-right:auto}
+  nav .brand .mk{width:24px;height:24px;border-radius:7px;overflow:hidden;display:block}
+  nav .links{display:flex;gap:4px}
+  nav .links a{font-size:13px;color:var(--ink-2);text-decoration:none;padding:7px 11px;border-radius:8px;font-weight:500}
+  nav .links a:hover{background:var(--accent-soft);color:var(--ink)}
+  @media(max-width:780px){nav .links{display:none}}
+
+  /* ============ HERO ============ */
+  header.hero{padding:64px 0 30px}
+  .lockup{display:flex;align-items:center;gap:16px;margin-bottom:30px}
+  .lockup .mk{width:60px;height:60px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);flex:none}
+  .lockup .mk svg{width:100%;height:100%;display:block}
+  .lockup .who{font-size:13px;color:var(--ink-3);line-height:1.4}
+  .lockup .who b{display:block;font-size:19px;color:var(--ink);font-weight:600;letter-spacing:-.02em}
+  h1.title{font-size:clamp(34px,5.4vw,56px);margin:0 0 14px;line-height:1.04}
+  .sub{font-size:16px;color:var(--ink-2);max-width:62ch;margin:0 0 22px}
+  .meta-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:12.5px;font-weight:500;color:var(--ink-2);background:var(--card);
+    border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+  .chip b{color:var(--ink);font-weight:600}
+
+  /* ============ SCORECARD ============ */
+  .scorecard{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;
+    background:var(--ink);color:#fff;border-radius:20px;padding:30px 34px;margin:34px 0 8px;
+    box-shadow:0 20px 50px rgba(12,13,16,.18)}
+  .scorecard .big{font-family:'Fraunces',serif;font-size:74px;font-weight:500;line-height:.9;letter-spacing:-.02em}
+  .scorecard .big small{font-size:26px;opacity:.55;font-weight:500}
+  .scorecard .meta{display:flex;flex-direction:column;gap:3px}
+  .scorecard .meta .k{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+  .scorecard .rankrow{display:flex;gap:34px;flex-wrap:wrap}
+  .scorecard .rankrow div span{display:block}
+  .scorecard .v{font-size:21px;font-weight:600;letter-spacing:-.01em;margin-top:2px}
+  .scorecard .note{font-size:13px;color:rgba(255,255,255,.62);max-width:46ch;margin-top:6px;line-height:1.5}
+  @media(max-width:620px){.scorecard{grid-template-columns:1fr;gap:18px;text-align:left}}
+
+  /* ============ SECTIONS ============ */
+  section{padding:46px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .sec-head .no{font-family:'Fraunces',serif;font-size:15px;color:var(--ink-3);font-weight:500;width:30px;flex:none}
+  .sec-head h2{font-size:27px;margin:0}
+  .sec-head .h-sub{font-size:14px;color:var(--ink-3);margin-left:auto;text-align:right}
+
+  /* cards & callouts */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:740px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .card .label{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .card p{margin:0;font-size:14.5px;color:var(--ink-2)}
+  .card p b,.card p strong{color:var(--ink)}
+  .dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+  .callout{background:var(--accent-soft);border:1px solid var(--line);border-left:3px solid var(--ink);
+    border-radius:10px;padding:14px 18px;font-size:14.5px;color:var(--ink-2);margin-top:16px}
+  .callout b{color:var(--ink)}
+  .so-what{border-left-color:var(--b-strong)}
+  .so-what .tag{font-weight:600;color:var(--b-strong);letter-spacing:.04em;text-transform:uppercase;font-size:11px;margin-right:6px}
+
+  /* moves list */
+  ol.moves{list-style:none;counter-reset:m;padding:0;margin:18px 0 0;display:grid;gap:12px}
+  ol.moves li{counter-increment:m;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  ol.moves li::before{content:counter(m);font-family:'Fraunces',serif;font-size:20px;color:#fff;background:var(--ink);
+    width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-weight:500}
+  ol.moves li b{color:var(--ink)}
+
+  /* ============ TABLES ============ */
+  .tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;font-size:13.8px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top}
+  thead th{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:600;background:#faf9f6;position:sticky;top:0}
+  tbody tr:last-child td{border-bottom:none}
+  td b,td strong{color:var(--ink)}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.subject{background:#fcfbf4}
+  tr.subject td{font-weight:500}
+  tr.subject td:first-child{box-shadow:inset 3px 0 0 var(--ink)}
+
+  /* score heatmap cell */
+  .score{display:inline-flex;align-items:center;justify-content:center;min-width:42px;
+    padding:4px 9px;border-radius:7px;font-weight:600;font-variant-numeric:tabular-nums;font-size:13.5px}
+  .dominant{color:var(--b-dominant);background:var(--b-dominant-bg)}
+  .strong{color:var(--b-strong);background:var(--b-strong-bg)}
+  .credible{color:var(--b-credible);background:var(--b-credible-bg)}
+  .thin{color:var(--b-thin);background:var(--b-thin-bg)}
+  .absent{color:var(--b-absent);background:var(--b-absent-bg)}
+  .dsov-total{font-family:'Fraunces',serif;font-size:18px;font-weight:500}
+
+  /* tier badge */
+  .tier{font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap}
+  .t-direct{background:#eceaf6;color:#4b3f86}
+  .t-adjacent{background:#eaf0f3;color:#3a5867}
+  .t-subject{background:var(--ink);color:#fff}
+
+  /* band legend */
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:12px;color:var(--ink-3)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+  /* ============ POSITIONING MAP ============ */
+  .map-wrap{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:0;margin-top:6px}
+  .map{position:relative;aspect-ratio:1.45/1;margin:0}
+  .map .axis-x,.map .axis-y{position:absolute;background:var(--line)}
+  .map .axis-x{left:8%;right:8%;top:50%;height:1px}
+  .map .axis-y{top:9%;bottom:13%;left:50%;width:1px}
+  .map .arrow{position:absolute;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .ax-top{top:10px;left:50%;transform:translateX(-50%)}
+  .ax-bottom{bottom:8px;left:50%;transform:translateX(-50%)}
+  .ax-left{left:14px;top:50%;transform:translateY(-50%) rotate(0)}
+  .ax-right{right:14px;top:50%;transform:translateY(-50%);text-align:right}
+  .quad-empty{position:absolute;right:9%;bottom:15%;width:33%;text-align:center;color:var(--ink-3);font-size:12px;
+    border:1px dashed var(--line);border-radius:10px;padding:14px 8px;background:repeating-linear-gradient(135deg,transparent,transparent 7px,#f6f5f1 7px,#f6f5f1 8px)}
+  .pt{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:5px}
+  .pt .d{width:13px;height:13px;border-radius:50%;background:var(--ink-3);border:2px solid var(--paper);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+  .pt .l{font-size:12px;font-weight:500;color:var(--ink-2);white-space:nowrap}
+  .pt.us .d{width:18px;height:18px;background:var(--ink)}
+  .pt.us .l{font-weight:700;color:var(--ink)}
+
+  /* channel finding header */
+  .channel{margin-top:22px}
+  .channel:first-of-type{margin-top:0}
+  .channel-h{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .channel-h h3{font-size:19px;margin:0}
+  .band-pill{margin-left:auto;font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px}
+
+  /* threats / whitespace */
+  ul.clean{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+  ul.clean li{display:grid;grid-template-columns:auto 1fr;gap:11px;font-size:14.5px;color:var(--ink-2)}
+  ul.clean li .mk{flex:none;margin-top:8px}
+  ul.clean li b{color:var(--ink)}
+  .lead{width:7px;height:7px;border-radius:50%;margin-top:8px}
+
+  /* priority table */
+  .prio{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:6px;white-space:nowrap}
+  .p-crit{background:var(--crit-bg);color:var(--crit)}
+  .p-high{background:var(--high-bg);color:var(--high)}
+  .p-med{background:var(--med-bg);color:var(--med)}
+
+  /* ============ BATTLECARDS ============ */
+  .bcard{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);
+    padding:26px 28px;margin-top:20px;overflow:hidden}
+  .bcard .top{display:flex;align-items:flex-start;gap:14px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+  .bcard .top .nm{font-size:21px;font-weight:600;letter-spacing:-.02em}
+  .bcard .top .upd{font-size:12px;color:var(--ink-3);margin-left:auto;white-space:nowrap}
+  .bcard .qt{font-size:14.5px;color:var(--ink-2);margin:0 0 18px}
+  .bcard .qt b{color:var(--ink)}
+  .steel{background:#faf9f6;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--ink-2);font-style:italic;margin-bottom:18px}
+  .steel .tag{font-style:normal;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:5px}
+  .winlose{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+  @media(max-width:680px){.winlose{grid-template-columns:1fr}}
+  .wl{border-radius:12px;padding:16px 18px}
+  .wl.win{background:var(--b-strong-bg);border:1px solid #d4e6da}
+  .wl.lose{background:var(--high-bg);border:1px solid #ecdcc1}
+  .wl h4{font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 11px}
+  .wl.win h4{color:var(--b-dominant)}
+  .wl.lose h4{color:var(--high)}
+  .wl ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .wl li{font-size:13.6px;color:var(--ink-2);padding-left:18px;position:relative}
+  .wl li::before{position:absolute;left:0;top:0}
+  .wl.win li::before{content:"✓";color:var(--b-strong);font-weight:700}
+  .wl.lose li::before{content:"→";color:var(--high);font-weight:700}
+  .wl li b{color:var(--ink)}
+  .wl li em{font-style:normal;color:var(--ink-3);font-size:12.5px}
+  .mini-h{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:18px 0 9px}
+  .landmines{display:grid;gap:8px}
+  .landmines div{font-size:13.6px;color:var(--ink-2);background:#faf9f6;border:1px solid var(--line);border-radius:9px;padding:10px 13px}
+  .dodont{display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;margin-top:16px}
+  .dodont b{color:var(--ink)}
+
+  details.evidence{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:8px}
+  details.evidence summary{cursor:pointer;padding:16px 20px;font-weight:600;font-size:14.5px;list-style:none;display:flex;align-items:center;gap:10px}
+  details.evidence summary::-webkit-details-marker{display:none}
+  details.evidence summary::before{content:"›";font-size:20px;color:var(--ink-3);transition:transform .2s}
+  details.evidence[open] summary::before{transform:rotate(90deg)}
+  details.evidence .tbl-scroll{border:none;border-top:1px solid var(--line);border-radius:0;box-shadow:none}
+  details.evidence td a{color:var(--ink-3);text-decoration:none;font-size:12px;word-break:break-all}
+  details.evidence td a:hover{color:var(--ink)}
+
+  .handoffs{font-size:13.5px;color:var(--ink-2)}
+  .handoffs code{background:var(--accent-soft);padding:1.5px 6px;border-radius:5px;font-size:12.5px;color:var(--ink)}
+
+  footer{padding:40px 0 64px;color:var(--ink-3);font-size:12.5px;border-top:1px solid var(--line);text-align:center}
+  footer .mk{width:20px;height:20px;border-radius:6px;overflow:hidden;display:inline-block;vertical-align:middle;margin:0 4px}
+
+  /* ============ PRINT ============ */
+  @media print{
+    nav{display:none}body{background:#fff;font-size:11px}
+    .wrap{max-width:none;padding:0 12mm}
+    section{padding:18px 0;break-inside:avoid}
+    .scorecard{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .card,.bcard,.tbl-scroll,.map-wrap{box-shadow:none;break-inside:avoid}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    a[href]::after{content:""}
+  }
+</style>
+</head>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">
+      <span class="mk"><svg viewBox="0 0 64 64" width="24" height="24"><rect width="64" height="64" rx="15" fill="#0c0d10"/><path d="M10 48 L24 24 L33 38 L40 28 L54 48 Z" fill="#fff"/></svg></span>
+      Northpeak · Lifecycle &amp; Email
+    </span>
+    <span class="links">
+      <a href="#map">Lifecycle map</a>
+      <a href="#flows">Flows</a>
+      <a href="#welcome">Welcome</a>
+      <a href="#trial">Trial</a>
+      <a href="#triggers">Triggers</a>
+      <a href="#measure">Measure</a>
+    </span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="lockup">
+      <span class="mk"><svg viewBox="0 0 64 64" width="60" height="60"><rect width="64" height="64" rx="15" fill="#0c0d10"/><path d="M10 48 L24 24 L33 38 L40 28 L54 48 Z" fill="#fff"/></svg></span>
+      <span class="who"><b>Northpeak</b> northpeak.example</span>
+    </div>
+    <p class="eyebrow">Lifecycle &amp; Email · Sample</p>
+    <h1 class="title">Email flows that get people live on day one.</h1>
+    <p class="sub">A lifecycle map from first touch to expansion, five core sequences with trigger and timing logic, and full ready-to-send copy for the two that matter most — welcome and trial activation. Every email carries the one promise: you can be live the same day.</p>
+    <div class="meta-chips">
+      <span class="chip"><b>Sequences</b>&nbsp; 5 core</span>
+      <span class="chip"><b>Emails</b>&nbsp; 11 written</span>
+      <span class="chip"><b>North-star</b>&nbsp; activation = first live dashboard</span>
+      <span class="chip" style="background:#fdf3e6;border-color:#ecd9b6"><b>⚠ Illustrative sample</b>&nbsp; fictional brand &amp; data</span>
+    </div>
+    <div class="scorecard">
+      <div class="meta" style="grid-column:1/-1">
+        <div class="k" style="margin-bottom:8px">The activation moment everything points to</div>
+        <div class="serif" style="font-size:30px;line-height:1.25;color:#fff">Connect a CRM → see a live forecast dashboard. That's "activated."</div>
+        <p class="note" style="margin-top:12px">Every lifecycle email has one job: move the reader one step closer to that first live dashboard, or — once they've seen it — to making it a habit. We measure flows on activation and week-2 retention, not opens.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section id="map">
+    <div class="sec-head"><span class="no">01</span><h2>Lifecycle map</h2><span class="h-sub">Five stages,<br>one job each</span></div>
+    <table>
+      <thead><tr><th>Stage</th><th>Where they are</th><th>The one job of this stage</th><th>Primary signal</th></tr></thead>
+      <tbody>
+        <tr><td><b>Subscribe</b></td><td>Downloaded the setup checklist, not in product</td><td>Earn trust, get the first product visit</td><td>Trial start</td></tr>
+        <tr><td><b>Activate</b></td><td>Signed up, CRM not yet connected</td><td>Get to the first live dashboard fast</td><td>Dashboard created</td></tr>
+        <tr><td><b>Adopt</b></td><td>Activated, using it alone</td><td>Make it a weekly habit; invite the team</td><td>2nd seat + week-2 return</td></tr>
+        <tr><td><b>Convert</b></td><td>Trial ending, value seen</td><td>Remove friction, make the paid choice obvious</td><td>Paid conversion</td></tr>
+        <tr><td><b>Expand</b></td><td>Paying, single team</td><td>Spread to a second team; surface the board-ready view</td><td>Seat / plan expansion</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:10px">Drawn straight from the activation definition above. A flow only exists if it moves someone from one stage to the next — no "newsletter for its own sake."</p>
+  </section>
+
+  <section id="flows">
+    <div class="sec-head"><span class="no">02</span><h2>The five core flows</h2><span class="h-sub">Trigger ▸ goal ▸<br>exit</span></div>
+    <div class="grid g2">
+      <div class="card">
+        <div class="label">① Welcome / nurture · pre-product</div>
+        <p><b>Trigger:</b> checklist download, no trial yet.</p>
+        <p class="note" style="margin-top:6px">3 emails over 6 days. Goal: first trial start. Exit on trial start (hands off to flow ②). Full copy below.</p>
+      </div>
+      <div class="card">
+        <div class="label">② Trial activation · in-product</div>
+        <p><b>Trigger:</b> trial started.</p>
+        <p class="note" style="margin-top:6px">4 emails, behavior-branched on "CRM connected?". Goal: first live dashboard. Full copy below.</p>
+      </div>
+      <div class="card">
+        <div class="label">③ Adoption / habit</div>
+        <p><b>Trigger:</b> dashboard created, &lt;2 returns in week 1.</p>
+        <p class="note" style="margin-top:6px">2 emails. Goal: week-2 return + invite a teammate. Exit when 2nd seat added.</p>
+      </div>
+      <div class="card">
+        <div class="label">④ Trial-end conversion</div>
+        <p><b>Trigger:</b> 3 days before trial end, activated.</p>
+        <p class="note" style="margin-top:6px">2 emails (value recap + last-day). Goal: paid. Branch: if not activated, send a "want a hand?" instead of a discount.</p>
+      </div>
+      <div class="card" style="grid-column:1/-1">
+        <div class="label">⑤ Expansion</div>
+        <p><b>Trigger:</b> paying 30+ days, single team, high weekly usage.</p>
+        <p class="note" style="margin-top:6px">1 email + in-app. Goal: second team or board-view upgrade. Exit on expansion or 90 days. <b>No discounting</b> — expansion is earned by a new use case (the board-ready view), not a price cut.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="welcome">
+    <div class="sec-head"><span class="no">03</span><h2>Flow ① — Welcome (full copy)</h2><span class="h-sub">3 emails ·<br>6 days</span></div>
+
+    <div class="card" style="margin-bottom:16px">
+      <div class="label">Email 1 · sent immediately · goal: deliver value, set the promise</div>
+      <table style="margin-top:10px">
+        <tbody>
+          <tr><th style="width:130px">Subject</th><td><b>Your same-day setup checklist (+ the 3 things that slow people down)</b></td></tr>
+          <tr><th>Preview</th><td>The afternoon version, not the six-week version.</td></tr>
+          <tr><th>Body</th><td>Here's the checklist you grabbed — it's the exact path our fastest teams follow to go from "connect a CRM" to "live forecast dashboard" in an afternoon.<br><br>Most people stall on the same three things: mapping custom CRM fields, over-configuring on day one, and waiting for IT they don't actually need. The checklist calls out each one.<br><br>You don't need a project plan to try this. When you're ready, the same checklist works on your real data.</td></tr>
+          <tr><th>CTA</th><td><b>Try it on your data → start free</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card" style="margin-bottom:16px">
+      <div class="label">Email 2 · +2 days · goal: handle the "it can't really be that fast" objection</div>
+      <table style="margin-top:10px">
+        <tbody>
+          <tr><th style="width:130px">Subject</th><td><b>"Six weeks" is a choice, not a law</b></td></tr>
+          <tr><th>Preview</th><td>Why enterprise setups take so long — and why yours doesn't have to.</td></tr>
+          <tr><th>Body</th><td>Enterprise revenue tools take six weeks because they're built for 500-seat orgs with a RevOps team and a custom data model. That's a real need — for those teams.<br><br>If you're a mid-market team that just needs pipeline truth this quarter, most of that timeline is configuring things you'll never use. Northpeak strips it to: connect, map, see your forecast. Same afternoon.<br><br>Here's a 90-second walkthrough of exactly that path →</td></tr>
+          <tr><th>CTA</th><td><b>Watch the afternoon setup</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <div class="label">Email 3 · +4 days · goal: trial start, soft urgency</div>
+      <table style="margin-top:10px">
+        <tbody>
+          <tr><th style="width:130px">Subject</th><td><b>The fastest way to know if Northpeak fits</b></td></tr>
+          <tr><th>Preview</th><td>20 minutes with your own data beats any demo.</td></tr>
+          <tr><th>Body</th><td>You can read about us, or you can connect your CRM and watch your real pipeline turn into a forecast in about 20 minutes. The second one tells you everything.<br><br>No sales call required, no credit card to look. If it's not obviously useful by the time your dashboard loads, you've lost 20 minutes — not a six-week rollout.</td></tr>
+          <tr><th>CTA</th><td><b>Start free — be live today</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="trial">
+    <div class="sec-head"><span class="no">04</span><h2>Flow ② — Trial activation (full copy)</h2><span class="h-sub">Branches on<br>"CRM connected?"</span></div>
+    <p class="note">This is the flow that earns the business. It watches one signal — is a CRM connected? — and sends a different track to each branch. Goal: first live dashboard.</p>
+
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card">
+        <div class="label">A1 · immediately on trial start</div>
+        <p><b>Subject:</b> Let's get your first dashboard live</p>
+        <p style="margin-top:8px">You're in. One step stands between you and a live forecast: connecting your CRM. It takes about 10 minutes and you can disconnect anytime. Start here →</p>
+        <p class="note" style="margin-top:8px"><b>CTA:</b> Connect my CRM</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--crit)">
+        <div class="label">A2 · +1 day · IF CRM not connected</div>
+        <p><b>Subject:</b> Stuck on the connect step? (2-min fix)</p>
+        <p style="margin-top:8px">Connecting trips a few people up — usually a permissions setting, not you. Here's the 2-minute fix for the three CRMs that cause it, or reply to this email and a human will get you connected today.</p>
+        <p class="note" style="margin-top:8px"><b>CTA:</b> Fix the connection · or "Reply for a hand"</p>
+      </div>
+      <div class="card" style="border-left:3px solid var(--b-strong)">
+        <div class="label">B1 · on CRM connected · IF dashboard not yet viewed</div>
+        <p><b>Subject:</b> Your data's in — here's your forecast</p>
+        <p style="margin-top:8px">Northpeak just built your first forecast dashboard from your live pipeline. This is the moment most people say "oh." Take a look — and notice the deals it's already flagging as at-risk.</p>
+        <p class="note" style="margin-top:8px"><b>CTA:</b> See my live dashboard</p>
+      </div>
+      <div class="card">
+        <div class="label">B2 · +2 days after first dashboard view</div>
+        <p><b>Subject:</b> Make it the view your Monday starts with</p>
+        <p style="margin-top:8px">You've seen your forecast once. The teams that stick make it their Monday ritual and invite one teammate so the numbers are shared truth, not your spreadsheet. Add a teammate in two clicks →</p>
+        <p class="note" style="margin-top:8px"><b>CTA:</b> Invite a teammate</p>
+      </div>
+    </div>
+    <p class="note" style="margin-top:12px"><b>Exit:</b> first live dashboard viewed → flow ③ (adoption). Not connected by day 4 → a single human "want me to set it up with you?" email, then drop from automation.</p>
+  </section>
+
+  <section id="triggers">
+    <div class="sec-head"><span class="no">05</span><h2>Trigger &amp; timing logic</h2><span class="h-sub">One row per<br>send rule</span></div>
+    <table>
+      <thead><tr><th>Flow / email</th><th>Trigger</th><th>Delay</th><th>Send-if condition</th><th>Suppress / exit</th></tr></thead>
+      <tbody>
+        <tr><td>① Welcome E1</td><td>Checklist download</td><td>Immediate</td><td>Not already a trialist</td><td>Exit on trial start</td></tr>
+        <tr><td>① Welcome E2</td><td>After E1</td><td>+2 days</td><td>No trial started</td><td>Exit on trial start</td></tr>
+        <tr><td>① Welcome E3</td><td>After E2</td><td>+2 days</td><td>No trial started</td><td>Exit on trial start</td></tr>
+        <tr><td>② Activation A1</td><td>Trial start</td><td>Immediate</td><td>—</td><td>—</td></tr>
+        <tr><td>② Activation A2</td><td>Trial start</td><td>+1 day</td><td><span class="score thin">CRM not connected</span></td><td>Skip if connected</td></tr>
+        <tr><td>② Activation B1</td><td>CRM connected</td><td>Immediate</td><td><span class="score strong">Dashboard not viewed</span></td><td>Skip if viewed</td></tr>
+        <tr><td>② Activation B2</td><td>First dashboard view</td><td>+2 days</td><td>&lt;2 seats</td><td>Exit on 2nd seat</td></tr>
+        <tr><td>④ Convert E1</td><td>3 days pre-trial-end</td><td>—</td><td><span class="score strong">Activated</span></td><td>Branch to "help" if not activated</td></tr>
+        <tr><td>④ Convert E2</td><td>Trial end day</td><td>—</td><td>Not yet paid</td><td>Exit on payment</td></tr>
+        <tr><td>⑤ Expansion</td><td>30 days paid + high usage</td><td>—</td><td>Single team</td><td>No discount; exit at 90 days</td></tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:10px"><b>Global rules:</b> max one lifecycle email/day per person; behavior triggers always beat the time-based drip (a "you connected!" email cancels the "still stuck?" email); quiet hours 8pm–7am local.</p>
+  </section>
+
+  <section id="measure">
+    <div class="sec-head"><span class="no">06</span><h2>Measurement &amp; hand-offs</h2></div>
+    <div class="grid g2">
+      <div class="card">
+        <div class="label">Measure flows on stage progression, not opens</div>
+        <table style="margin-top:8px">
+          <tbody>
+            <tr><th>① Welcome</th><td>Download → trial-start rate</td></tr>
+            <tr><th>② Activation</th><td>Trial → first live dashboard (the north star)</td></tr>
+            <tr><th>③ Adoption</th><td>Week-2 return + 2nd-seat rate</td></tr>
+            <tr><th>④ Convert</th><td>Activated-trial → paid</td></tr>
+            <tr><th>⑤ Expand</th><td>Single-team → multi-team / plan-up</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="label">Hand-offs</div>
+        <ul style="margin:6px 0 0;padding-left:18px;line-height:1.7">
+          <li>Subject-line voice and the same-day promise come from the <b>Positioning Studio</b> messaging house — keep them identical.</li>
+          <li>Nurture content (E2 walkthrough, comparison) is pulled from the <b>Content Engine</b> calendar.</li>
+          <li>Trial-end objection handling mirrors the <b>Battlecard</b> — same answers in email and on the call.</li>
+          <li>Re-score timing every quarter against actual activation data.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="mk"><svg viewBox="0 0 64 64" width="20" height="20"><rect width="64" height="64" rx="15" fill="#0c0d10"/><path d="M10 48 L24 24 L33 38 L40 28 L54 48 Z" fill="#fff"/></svg></span>
+    Lifecycle &amp; Email Flows (sample) · Generated by the <b>Vantage</b> Lifecycle pack · Illustrative fictional data
+  </div>
+</footer>
+</body>
+</html>

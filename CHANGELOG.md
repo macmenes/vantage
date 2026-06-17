@@ -3,6 +3,15 @@
 All notable changes to **Vantage** are documented here.
 This project adheres to [Semantic Versioning](https://semver.org).
 
+## [0.2.1] — 2026-06-16
+
+### Added — sample report for every pack
+- Shipped a full, self-contained HTML sample for each Build pack, all on one fictional brand
+  (**Northpeak**) so the teardown and the marketing it produces read as one story:
+  `sample-messaging-house.html`, `sample-campaign-concepts.html`, `sample-content-plan.html`,
+  `sample-lifecycle-flows.html`. Each is also bundled as the skill's `references/report-example.html`.
+- README now links all five samples in a **Sample reports** gallery.
+
 ## [0.2.0] — 2026-06-16
 
 Vantage becomes a hub: "analyze the field" **and** "build your marketing."

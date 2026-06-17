@@ -25,7 +25,7 @@ Every skill delivers a single, gorgeous, self-contained **HTML report**.
 
 **Lives inside your agent · Web search + fetch only · No API keys · Free & open source.**
 
-[Install](#install) · [The experience](#the-experience) · [What you get](#what-you-get) · [Commands](#commands) · [How it works](#how-it-works) · [Sample report](examples/sample-competitive-landscape.html)
+[Install](#install) · [The experience](#the-experience) · [What you get](#what-you-get) · [Commands](#commands) · [How it works](#how-it-works) · [Sample reports](#sample-reports)
 
 <!-- BRANDING TODO: drop a hero logo + screenshot of a generated report here -->
 
@@ -100,7 +100,17 @@ hand straight to a founder, a growth lead, or a sales rep.
 | **Action plan** | Prioritized (Critical → High → Medium) moves tied to the gaps |
 | **Evidence log** | Every claim linked to a public source with a capture date |
 
-👉 **[See a full sample report (fictional data) → Northpeak vs. its market](examples/sample-competitive-landscape.html)** *(open in a browser)*
+### Sample reports
+
+Every pack ships a real, self-contained HTML sample built on one fictional brand — **Northpeak**, a revenue-intelligence platform — so you can read a teardown and the marketing it produces as one continuous story. Open any of these in a browser:
+
+| Pack | Sample (fictional data) |
+|------|-------------------------|
+| 🔍 Competitive Analysis | **[Competitive landscape → Northpeak vs. its market](examples/sample-competitive-landscape.html)** |
+| 🛠 Positioning Studio | **[Messaging house](examples/sample-messaging-house.html)** |
+| 🛠 Paid-Media Lab | **[Campaign concepts](examples/sample-campaign-concepts.html)** |
+| 🛠 Content Engine | **[Content plan](examples/sample-content-plan.html)** |
+| 🛠 Lifecycle & Email | **[Lifecycle & email flows](examples/sample-lifecycle-flows.html)** |
 
 ## Install
 

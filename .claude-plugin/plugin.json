@@ -1,6 +1,6 @@
 {
   "name": "vantage",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Vantage.os — Marketing Intelligence OS that lives inside your agent. Analyzes the competitive field (Digital Share-of-Voice index, positioning map, competitive matrix, sales battlecards) AND helps you act on it: positioning & messaging house, paid-media ad concepts, content plan, and lifecycle/email flows. Every skill delivers a beautiful self-contained HTML report. Web search + fetch only, no API keys.",
   "author": {
     "name": "macmenes",

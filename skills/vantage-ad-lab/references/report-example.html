@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Campaign Concepts — Northpeak (Sample)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;450;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============ DESIGN TOKENS (reusable across reports) ============ */
+  :root{
+    --ink:#0c0d10;          /* near-black text */
+    --ink-2:#3a3d44;        /* secondary text */
+    --ink-3:#73767e;        /* muted */
+    --line:#e7e5e0;         /* hairlines */
+    --line-2:#efede8;
+    --paper:#fbfaf7;        /* warm off-white */
+    --card:#ffffff;
+    --accent:#0c0d10;       /* chrome accent = ink (monochrome, design-forward) */
+    --accent-soft:#f2f1ec;
+    /* data heatmap scale (only place color is allowed) */
+    --b-dominant:#0f5c3f;   --b-dominant-bg:#e4f0ea;
+    --b-strong:#2f7d54;     --b-strong-bg:#ebf3ee;
+    --b-credible:#9a7b1f;   --b-credible-bg:#f6f0dd;
+    --b-thin:#b5631f;       --b-thin-bg:#f7e9dd;
+    --b-absent:#9a3b34;     --b-absent-bg:#f5e2e0;
+    --crit:#9a3b34; --crit-bg:#f6e4e2;
+    --high:#9a6a1f; --high-bg:#f7eedd;
+    --med:#41515f;  --med-bg:#e9edf0;
+    --shadow:0 1px 2px rgba(12,13,16,.04), 0 8px 30px rgba(12,13,16,.05);
+    --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:15.5px;line-height:1.62;font-feature-settings:"cv05","ss01","tnum";
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:0 28px}
+  h1,h2,h3,h4{font-weight:600;letter-spacing:-.02em;line-height:1.18;color:var(--ink)}
+  .serif{font-family:'Fraunces',Georgia,serif;font-weight:500;letter-spacing:-.01em}
+  a{color:inherit}
+  .tnum{font-variant-numeric:tabular-nums}
+  .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+  /* ============ TOP NAV ============ */
+  nav{position:sticky;top:0;z-index:50;background:rgba(251,250,247,.82);
+    backdrop-filter:saturate(160%) blur(14px);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:8px;height:58px}
+  nav .brand{display:flex;align-items:center;gap:10px;font-weight:600;letter-spacing:-.02em;margin-right:auto}
+  nav .brand .mk{width:24px;height:24px;border-radius:7px;overflow:hidden;display:block}
+  nav .links{display:flex;gap:4px}
+  nav .links a{font-size:13px;color:var(--ink-2);text-decoration:none;padding:7px 11px;border-radius:8px;font-weight:500}
+  nav .links a:hover{background:var(--accent-soft);color:var(--ink)}
+  @media(max-width:780px){nav .links{display:none}}
+
+  /* ============ HERO ============ */
+  header.hero{padding:64px 0 30px}
+  .lockup{display:flex;align-items:center;gap:16px;margin-bottom:30px}
+  .lockup .mk{width:60px;height:60px;border-radius:16px;overflow:hidden;box-shadow:var(--shadow);flex:none}
+  .lockup .mk svg{width:100%;height:100%;display:block}
+  .lockup .who{font-size:13px;color:var(--ink-3);line-height:1.4}
+  .lockup .who b{display:block;font-size:19px;color:var(--ink);font-weight:600;letter-spacing:-.02em}
+  h1.title{font-size:clamp(34px,5.4vw,56px);margin:0 0 14px;line-height:1.04}
+  .sub{font-size:16px;color:var(--ink-2);max-width:62ch;margin:0 0 22px}
+  .meta-chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{font-size:12.5px;font-weight:500;color:var(--ink-2);background:var(--card);
+    border:1px solid var(--line);border-radius:999px;padding:5px 12px}
+  .chip b{color:var(--ink);font-weight:600}
+
+  /* ============ SCORECARD ============ */
+  .scorecard{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center;
+    background:var(--ink);color:#fff;border-radius:20px;padding:30px 34px;margin:34px 0 8px;
+    box-shadow:0 20px 50px rgba(12,13,16,.18)}
+  .scorecard .big{font-family:'Fraunces',serif;font-size:74px;font-weight:500;line-height:.9;letter-spacing:-.02em}
+  .scorecard .big small{font-size:26px;opacity:.55;font-weight:500}
+  .scorecard .meta{display:flex;flex-direction:column;gap:3px}
+  .scorecard .meta .k{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+  .scorecard .rankrow{display:flex;gap:34px;flex-wrap:wrap}
+  .scorecard .rankrow div span{display:block}
+  .scorecard .v{font-size:21px;font-weight:600;letter-spacing:-.01em;margin-top:2px}
+  .scorecard .note{font-size:13px;color:rgba(255,255,255,.62);max-width:46ch;margin-top:6px;line-height:1.5}
+  @media(max-width:620px){.scorecard{grid-template-columns:1fr;gap:18px;text-align:left}}
+
+  /* ============ SECTIONS ============ */
+  section{padding:46px 0;border-top:1px solid var(--line)}
+  section:first-of-type{border-top:none}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:26px}
+  .sec-head .no{font-family:'Fraunces',serif;font-size:15px;color:var(--ink-3);font-weight:500;width:30px;flex:none}
+  .sec-head h2{font-size:27px;margin:0}
+  .sec-head .h-sub{font-size:14px;color:var(--ink-3);margin-left:auto;text-align:right}
+
+  /* cards & callouts */
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:1fr 1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:740px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow)}
+  .card .label{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+  .card p{margin:0;font-size:14.5px;color:var(--ink-2)}
+  .card p b,.card p strong{color:var(--ink)}
+  .dot{width:7px;height:7px;border-radius:50%;display:inline-block}
+  .callout{background:var(--accent-soft);border:1px solid var(--line);border-left:3px solid var(--ink);
+    border-radius:10px;padding:14px 18px;font-size:14.5px;color:var(--ink-2);margin-top:16px}
+  .callout b{color:var(--ink)}
+  .so-what{border-left-color:var(--b-strong)}
+  .so-what .tag{font-weight:600;color:var(--b-strong);letter-spacing:.04em;text-transform:uppercase;font-size:11px;margin-right:6px}
+
+  /* moves list */
+  ol.moves{list-style:none;counter-reset:m;padding:0;margin:18px 0 0;display:grid;gap:12px}
+  ol.moves li{counter-increment:m;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:start;
+    background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  ol.moves li::before{content:counter(m);font-family:'Fraunces',serif;font-size:20px;color:#fff;background:var(--ink);
+    width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-weight:500}
+  ol.moves li b{color:var(--ink)}
+
+  /* ============ TABLES ============ */
+  .tbl-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;font-size:13.8px}
+  th,td{padding:11px 14px;text-align:left;border-bottom:1px solid var(--line-2);vertical-align:top}
+  thead th{font-size:11px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-3);font-weight:600;background:#faf9f6;position:sticky;top:0}
+  tbody tr:last-child td{border-bottom:none}
+  td b,td strong{color:var(--ink)}
+  .num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.subject{background:#fcfbf4}
+  tr.subject td{font-weight:500}
+  tr.subject td:first-child{box-shadow:inset 3px 0 0 var(--ink)}
+
+  /* score heatmap cell */
+  .score{display:inline-flex;align-items:center;justify-content:center;min-width:42px;
+    padding:4px 9px;border-radius:7px;font-weight:600;font-variant-numeric:tabular-nums;font-size:13.5px}
+  .dominant{color:var(--b-dominant);background:var(--b-dominant-bg)}
+  .strong{color:var(--b-strong);background:var(--b-strong-bg)}
+  .credible{color:var(--b-credible);background:var(--b-credible-bg)}
+  .thin{color:var(--b-thin);background:var(--b-thin-bg)}
+  .absent{color:var(--b-absent);background:var(--b-absent-bg)}
+  .dsov-total{font-family:'Fraunces',serif;font-size:18px;font-weight:500}
+
+  /* tier badge */
+  .tier{font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:6px;white-space:nowrap}
+  .t-direct{background:#eceaf6;color:#4b3f86}
+  .t-adjacent{background:#eaf0f3;color:#3a5867}
+  .t-subject{background:var(--ink);color:#fff}
+
+  /* band legend */
+  .legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;font-size:12px;color:var(--ink-3)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+  /* ============ POSITIONING MAP ============ */
+  .map-wrap{position:relative;background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    box-shadow:var(--shadow);padding:0;margin-top:6px}
+  .map{position:relative;aspect-ratio:1.45/1;margin:0}
+  .map .axis-x,.map .axis-y{position:absolute;background:var(--line)}
+  .map .axis-x{left:8%;right:8%;top:50%;height:1px}
+  .map .axis-y{top:9%;bottom:13%;left:50%;width:1px}
+  .map .arrow{position:absolute;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3)}
+  .ax-top{top:10px;left:50%;transform:translateX(-50%)}
+  .ax-bottom{bottom:8px;left:50%;transform:translateX(-50%)}
+  .ax-left{left:14px;top:50%;transform:translateY(-50%) rotate(0)}
+  .ax-right{right:14px;top:50%;transform:translateY(-50%);text-align:right}
+  .quad-empty{position:absolute;right:9%;bottom:15%;width:33%;text-align:center;color:var(--ink-3);font-size:12px;
+    border:1px dashed var(--line);border-radius:10px;padding:14px 8px;background:repeating-linear-gradient(135deg,transparent,transparent 7px,#f6f5f1 7px,#f6f5f1 8px)}
+  .pt{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:5px}
+  .pt .d{width:13px;height:13px;border-radius:50%;background:var(--ink-3);border:2px solid var(--paper);box-shadow:0 1px 3px rgba(0,0,0,.18)}
+  .pt .l{font-size:12px;font-weight:500;color:var(--ink-2);white-space:nowrap}
+  .pt.us .d{width:18px;height:18px;background:var(--ink)}
+  .pt.us .l{font-weight:700;color:var(--ink)}
+
+  /* channel finding header */
+  .channel{margin-top:22px}
+  .channel:first-of-type{margin-top:0}
+  .channel-h{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+  .channel-h h3{font-size:19px;margin:0}
+  .band-pill{margin-left:auto;font-size:12px;font-weight:600;padding:5px 12px;border-radius:999px}
+
+  /* threats / whitespace */
+  ul.clean{list-style:none;padding:0;margin:0;display:grid;gap:11px}
+  ul.clean li{display:grid;grid-template-columns:auto 1fr;gap:11px;font-size:14.5px;color:var(--ink-2)}
+  ul.clean li .mk{flex:none;margin-top:8px}
+  ul.clean li b{color:var(--ink)}
+  .lead{width:7px;height:7px;border-radius:50%;margin-top:8px}
+
+  /* priority table */
+  .prio{font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:6px;white-space:nowrap}
+  .p-crit{background:var(--crit-bg);color:var(--crit)}
+  .p-high{background:var(--high-bg);color:var(--high)}
+  .p-med{background:var(--med-bg);color:var(--med)}
+
+  /* ============ BATTLECARDS ============ */
+  .bcard{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);
+    padding:26px 28px;margin-top:20px;overflow:hidden}
+  .bcard .top{display:flex;align-items:flex-start;gap:14px;border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:18px}
+  .bcard .top .nm{font-size:21px;font-weight:600;letter-spacing:-.02em}
+  .bcard .top .upd{font-size:12px;color:var(--ink-3);margin-left:auto;white-space:nowrap}
+  .bcard .qt{font-size:14.5px;color:var(--ink-2);margin:0 0 18px}
+  .bcard .qt b{color:var(--ink)}
+  .steel{background:#faf9f6;border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;color:var(--ink-2);font-style:italic;margin-bottom:18px}
+  .steel .tag{font-style:normal;font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);display:block;margin-bottom:5px}
+  .winlose{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+  @media(max-width:680px){.winlose{grid-template-columns:1fr}}
+  .wl{border-radius:12px;padding:16px 18px}
+  .wl.win{background:var(--b-strong-bg);border:1px solid #d4e6da}
+  .wl.lose{background:var(--high-bg);border:1px solid #ecdcc1}
+  .wl h4{font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin:0 0 11px}
+  .wl.win h4{color:var(--b-dominant)}
+  .wl.lose h4{color:var(--high)}
+  .wl ul{margin:0;padding:0;list-style:none;display:grid;gap:10px}
+  .wl li{font-size:13.6px;color:var(--ink-2);padding-left:18px;position:relative}
+  .wl li::before{position:absolute;left:0;top:0}
+  .wl.win li::before{content:"✓";color:var(--b-strong);font-weight:700}
+  .wl.lose li::before{content:"→";color:var(--high);font-weight:700}
+  .wl li b{color:var(--ink)}
+  .wl li em{font-style:normal;color:var(--ink-3);font-size:12.5px}
+  .mini-h{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:18px 0 9px}
+  .landmines{display:grid;gap:8px}
+  .landmines div{font-size:13.6px;color:var(--ink-2);background:#faf9f6;border:1px solid var(--line);border-radius:9px;padding:10px 13px}
+  .dodont{display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;margin-top:16px}
+  .dodont b{color:var(--ink)}
+
+  details.evidence{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);margin-top:8px}
+  details.evidence summary{cursor:pointer;padding:16px 20px;font-weight:600;font-size:14.5px;list-style:none;display:flex;align-items:center;gap:10px}
+  details.evidence summary::-webkit-details-marker{display:none}
+  details.evidence summary::before{content:"›";font-size:20px;color:var(--ink-3);transition:transform .2s}
+  details.evidence[open] summary::before{transform:rotate(90deg)}
+  details.evidence .tbl-scroll{border:none;border-top:1px solid var(--line);border-radius:0;box-shadow:none}
+  details.evidence td a{color:var(--ink-3);text-decoration:none;font-size:12px;word-break:break-all}
+  details.evidence td a:hover{color:var(--ink)}
+
+  .handoffs{font-size:13.5px;color:var(--ink-2)}
+  .handoffs code{background:var(--accent-soft);padding:1.5px 6px;border-radius:5px;font-size:12.5px;color:var(--ink)}
+
+  footer{padding:40px 0 64px;color:var(--ink-3);font-size:12.5px;border-top:1px solid var(--line);text-align:center}
+  footer .mk{width:20px;height:20px;border-radius:6px;overflow:hidden;display:inline-block;vertical-align:middle;margin:0 4px}
+
+  /* ============ PRINT ============ */
+  @media print{
+    nav{display:none}body{background:#fff;font-size:11px}
+    .wrap{max-width:none;padding:0 12mm}
+    section{padding:18px 0;break-inside:avoid}
+    .scorecard{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .card,.bcard,.tbl-scroll,.map-wrap{box-shadow:none;break-inside:avoid}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    a[href]::after{content:""}
+  }
+</style>
+</head>
+
+<nav>
+  <div class="wrap">
+    <span class="brand">
+      <span class="mk"><svg viewBox="0 0 64 64" width="24" height="24"><rect width="64" height="64" rx="15" fill="#0c0d10"/><path d="M10 48 L24 24 L33 38 L40 28 L54 48 Z" fill="#fff"/></svg></span>
+      Northpeak · Campaign Concepts
+    </span>
+    <span class="links">
+      <a href="#strategy">Strategy</a>
+      <a href="#angles">Angles</a>
+      <a href="#hooks">Hooks</a>
+      <a href="#ads">Ad copy</a>
+      <a href="#briefs">Creative</a>
+      <a href="#test">Test plan</a>
+    </span>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="lockup">
+      <span class="mk"><svg viewBox="0 0 64 64" width="60" height="60"><rect width="64" height="64" rx="15" fill="#0c0d10"/><path d="M10 48 L24 24 L33 38 L40 28 L54 48 Z" fill="#fff"/></svg></span>
+      <span class="who"><b>Northpeak</b> northpeak.example</span>
+    </div>
+    <p class="eyebrow">Paid-Media Lab · Sample</p>
+    <h1 class="title">Campaign concepts, ready to test.</h1>
+    <p class="sub">Ad concepts built from what's already working in the market and Northpeak's positioning — angles, hooks, full copy per channel, creative briefs, and a test plan. Paste and launch.</p>
+    <div class="meta-chips">
+      <span class="chip"><b>Objective</b>&nbsp; Free-trial signups</span>
+      <span class="chip"><b>Channels</b>&nbsp; Meta · Google · LinkedIn</span>
+      <span class="chip" style="background:#fdf3e6;border-color:#ecd9b6"><b>⚠ Illustrative sample</b>&nbsp; fictional brand &amp; data</span>
+    </div>
+    <div class="scorecard">
+      <div class="meta" style="grid-column:1/-1">
+        <div class="k">The bet</div>
+        <div class="serif" style="font-size:26px;color:#fff;margin-top:4px">Win on speed-to-value. Everyone else sells features — we sell "live today."</div>
+        <p class="note" style="margin-top:10px">The competitor ad teardown shows the set crowding the "all-in-one platform" angle. Time-to-value is wide open. That's our lead angle.</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section id="strategy">
+    <div class="sec-head"><span class="no">01</span><h2>Strategy snapshot</h2></div>
+    <div class="grid g3">
+      <div class="card"><div class="label">Who</div><p>Mid-market RevOps &amp; sales leaders, 20–200 reps, already on Salesforce/HubSpot, frustrated by slow or shallow tools.</p></div>
+      <div class="card"><div class="label">One action</div><p>Start a free trial (self-serve, no card). Secondary: book a 15-min demo.</p></div>
+      <div class="card"><div class="label">Lead angle</div><p><b>Speed-to-value</b> — under-served by the set, and the one thing we provably beat everyone on.</p></div>
+    </div>
+  </section>
+
+  <section id="angles">
+    <div class="sec-head"><span class="no">02</span><h2>Angle matrix</h2><span class="h-sub">Where the set is crowded<br>vs where we can win</span></div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Angle</th><th>Set saturation</th><th>Priority for us</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr class="subject"><td><b>Speed-to-value ("live today")</b></td><td><span class="score strong">open</span></td><td><span class="prio p-crit">Lead</span></td><td>Nobody owns it; we provably win it</td></tr>
+          <tr><td>Comparison (vs enterprise rollout)</td><td><span class="score credible">light</span></td><td><span class="prio p-high">High</span></td><td>Names the pain of the leader</td></tr>
+          <tr><td>Outcome (pipeline truth)</td><td><span class="score credible">medium</span></td><td><span class="prio p-high">High</span></td><td>Concrete, demo-able</td></tr>
+          <tr><td>Social proof</td><td><span class="score thin">crowded</span></td><td><span class="prio p-med">Support</span></td><td>Use once we have review volume</td></tr>
+          <tr><td>"All-in-one platform"</td><td><span class="score absent">saturated</span></td><td><span class="prio p-med">Avoid</span></td><td>Whole set says it; says nothing</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="hooks">
+    <div class="sec-head"><span class="no">03</span><h2>Hook bank</h2><span class="h-sub">First line / first 3 seconds<br>— tagged by angle</span></div>
+    <div class="grid g2">
+      <div class="card"><div class="label">Speed-to-value</div><ul class="clean" style="margin-top:6px">
+        <li><span class="lead" style="background:var(--ink)"></span><span>"Your last revenue tool took six weeks to turn on. This one's live today."</span></li>
+        <li><span class="lead" style="background:var(--ink)"></span><span>"Connect your CRM at 9am. See real pipeline by lunch."</span></li>
+        <li><span class="lead" style="background:var(--ink)"></span><span>"No implementation call. No onboarding fee. Just turn it on."</span></li>
+      </ul></div>
+      <div class="card"><div class="label">Comparison</div><ul class="clean" style="margin-top:6px">
+        <li><span class="lead" style="background:var(--ink)"></span><span>"Enterprise revenue tools, minus the enterprise rollout."</span></li>
+        <li><span class="lead" style="background:var(--ink)"></span><span>"You don't need 200 features. You need the 6 that move forecast."</span></li>
+        <li><span class="lead" style="background:var(--ink)"></span><span>"Cobalt's depth. None of Cobalt's setup."</span></li>
+      </ul></div>
+      <div class="card"><div class="label">Outcome</div><ul class="clean" style="margin-top:6px">
+        <li><span class="lead" style="background:var(--ink)"></span><span>"See which deals are slipping before the forecast does."</span></li>
+        <li><span class="lead" style="background:var(--ink)"></span><span>"Know your real pipeline — not the CRM's optimistic version."</span></li>
+        <li><span class="lead" style="background:var(--ink)"></span><span>"Where's your pipeline leaking? You'll know by this afternoon."</span></li>
+      </ul></div>
+      <div class="card"><div class="label">Pattern-break / curiosity</div><ul class="clean" style="margin-top:6px">
+        <li><span class="lead" style="background:var(--ink)"></span><span>"Most 'revenue platforms' are CRM dashboards with a markup."</span></li>
+        <li><span class="lead" style="background:var(--ink)"></span><span>"The fastest way to a clean forecast isn't a six-week rollout."</span></li>
+        <li><span class="lead" style="background:var(--ink)"></span><span>"We made revenue intelligence boring: it just works on day one."</span></li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section id="ads">
+    <div class="sec-head"><span class="no">04</span><h2>Ad copy — paste-ready</h2></div>
+
+    <div class="channel"><div class="channel-h"><h3>Meta / Instagram</h3><span class="band-pill strong">3 variants</span></div>
+    <div class="grid g3">
+      <div class="card"><div class="label">Variant 1 · Speed</div>
+        <p style="font-size:12px;color:var(--ink-3)">PRIMARY TEXT</p>
+        <p>Your last revenue tool took six weeks to turn on. Northpeak is live today. Connect Salesforce or HubSpot, invite your team, and see real pipeline health, forecasting, and rep scorecards this afternoon — no implementation, no sales call.</p>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:8px">HEADLINE</p><p><b>Revenue intelligence, live today</b></p>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:6px">DESCRIPTION</p><p>Free trial · no card</p>
+        <p style="margin-top:6px"><b>[ Start free ]</b></p>
+      </div>
+      <div class="card"><div class="label">Variant 2 · Comparison</div>
+        <p style="font-size:12px;color:var(--ink-3)">PRIMARY TEXT</p>
+        <p>You don't need 200 features and a six-week rollout. You need the handful that actually move your forecast — pipeline health, slip risk, rep performance. Northpeak gives mid-market teams enterprise-grade depth, self-serve, at a price that makes sense.</p>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:8px">HEADLINE</p><p><b>Enterprise depth, no rollout</b></p>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:6px">DESCRIPTION</p><p>See plans &amp; pricing</p>
+        <p style="margin-top:6px"><b>[ Start free ]</b></p>
+      </div>
+      <div class="card"><div class="label">Variant 3 · Outcome</div>
+        <p style="font-size:12px;color:var(--ink-3)">PRIMARY TEXT</p>
+        <p>The CRM forecast says one thing. Reality says another. Northpeak shows you which deals are really slipping, where pipeline leaks, and who needs coaching — in time to do something about it. Connect your CRM and find out this afternoon.</p>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:8px">HEADLINE</p><p><b>See your real pipeline</b></p>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:6px">DESCRIPTION</p><p>Free trial · live in a day</p>
+        <p style="margin-top:6px"><b>[ Start free ]</b></p>
+      </div>
+    </div></div>
+
+    <div class="channel"><div class="channel-h"><h3>Google Search — Responsive Search Ad</h3><span class="band-pill strong">RSA assets</span></div>
+    <div class="grid g2">
+      <div class="card"><div class="label">Headlines (≤30 char — mix &amp; match)</div>
+        <ul class="clean" style="margin-top:6px;font-size:13.5px">
+          <li><span class="lead" style="background:var(--ink)"></span><span>Revenue Intelligence Tool</span></li>
+          <li><span class="lead" style="background:var(--ink)"></span><span>Live The Same Day You Sign</span></li>
+          <li><span class="lead" style="background:var(--ink)"></span><span>No 6-Week Rollout</span></li>
+          <li><span class="lead" style="background:var(--ink)"></span><span>Pipeline Health &amp; Forecasting</span></li>
+          <li><span class="lead" style="background:var(--ink)"></span><span>Enterprise Depth, Mid-Market</span></li>
+          <li><span class="lead" style="background:var(--ink)"></span><span>Syncs Salesforce &amp; HubSpot</span></li>
+          <li><span class="lead" style="background:var(--ink)"></span><span>Free Trial — No Card</span></li>
+          <li><span class="lead" style="background:var(--ink)"></span><span>See Real Pipeline Today</span></li>
+        </ul>
+      </div>
+      <div class="card"><div class="label">Descriptions (≤90 char)</div>
+        <ul class="clean" style="margin-top:6px;font-size:13.5px">
+          <li><span class="lead" style="background:var(--ink)"></span><span>Connect your CRM and see forecasting, pipeline health &amp; rep scorecards today.</span></li>
+          <li><span class="lead" style="background:var(--ink)"></span><span>Enterprise-grade revenue intelligence without the rollout or the price. Start free.</span></li>
+          <li><span class="lead" style="background:var(--ink)"></span><span>Skip the six-week setup. Self-serve, live in a day, no sales call required.</span></li>
+          <li><span class="lead" style="background:var(--ink)"></span><span>Know which deals are slipping before the forecast does. Try Northpeak free.</span></li>
+        </ul>
+      </div>
+    </div></div>
+
+    <div class="channel"><div class="channel-h"><h3>LinkedIn</h3><span class="band-pill strong">2 variants</span></div>
+    <div class="grid g2">
+      <div class="card"><div class="label">Variant 1 · For RevOps</div>
+        <p style="font-size:12px;color:var(--ink-3)">INTRO</p>
+        <p>RevOps leaders: your forecast is only as good as the day you can see it. Northpeak connects to your CRM and delivers pipeline health, slip risk, and rep scorecards the same day — no implementation project, no enterprise price tag.</p>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:8px">HEADLINE</p><p><b>Forecast accuracy, live in a day</b></p>
+        <p style="margin-top:6px"><b>[ Start free ]</b></p>
+      </div>
+      <div class="card"><div class="label">Variant 2 · For sales leaders</div>
+        <p style="font-size:12px;color:var(--ink-3)">INTRO</p>
+        <p>If you found out a deal was slipping a week earlier, would you save it? Northpeak shows mid-market sales teams where pipeline is really headed — in time to act. Live the day you sign up.</p>
+        <p style="font-size:12px;color:var(--ink-3);margin-top:8px">HEADLINE</p><p><b>Catch slipping deals sooner</b></p>
+        <p style="margin-top:6px"><b>[ Book a 15-min demo ]</b></p>
+      </div>
+    </div></div>
+  </section>
+
+  <section id="briefs">
+    <div class="sec-head"><span class="no">05</span><h2>Creative briefs</h2><span class="h-sub">Top 3 concepts<br>for design</span></div>
+    <div class="grid g3">
+      <div class="card"><div class="label">1 · The clock</div><p><b>Format:</b> static / 6-sec video.<br><b>Visual:</b> split screen — "Week 6: still onboarding" vs "Day 1: live." <b>Hook-on-frame:</b> "Six weeks vs today." <b>1-sec read:</b> speed.</p></div>
+      <div class="card"><div class="label">2 · The two forecasts</div><p><b>Format:</b> carousel.<br><b>Visual:</b> CRM forecast vs Northpeak's real forecast, deals flagged slipping. <b>Hook-on-frame:</b> "Your CRM is lying to you." <b>1-sec read:</b> truth.</p></div>
+      <div class="card"><div class="label">3 · The product, fast</div><p><b>Format:</b> 15-sec screen capture.<br><b>Visual:</b> connect CRM → dashboard populates in real time. <b>Hook-on-frame:</b> "Setup, in real time." <b>1-sec read:</b> it just works.</p></div>
+    </div>
+  </section>
+
+  <section id="lp">
+    <div class="sec-head"><span class="no">06</span><h2>Landing page outline</h2><span class="h-sub">Message-matched<br>to the lead ad</span></div>
+    <div class="card">
+      <ol style="margin:0;padding-left:20px;line-height:1.9">
+        <li><b>Hero</b> — mirror the winning ad: "See real pipeline today, not next quarter." Start-free CTA + 30-sec product video.</li>
+        <li><b>Proof bar</b> — "Live in a day · Syncs Salesforce &amp; HubSpot · No implementation fee."</li>
+        <li><b>How it works</b> — 3 steps: connect CRM → invite team → decide from real numbers.</li>
+        <li><b>The depth</b> — forecasting, pipeline health, rep scorecards (screenshots).</li>
+        <li><b>Objection handling</b> — "Is it really live in a day?" / "How is this different from my CRM?" / pricing transparency.</li>
+        <li><b>Close</b> — repeat CTA + "free, no card."</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="test">
+    <div class="sec-head"><span class="no">07</span><h2>Test plan</h2></div>
+    <div class="card">
+      <p><b>Test order:</b> angle → hook → creative → audience. Don't optimize creative for a losing angle.</p>
+      <p style="margin-top:10px"><b>First test:</b> 3 angles (Speed · Comparison · Outcome) × 2 hooks each = 6 ad sets, equal budget, one audience.</p>
+      <p style="margin-top:10px"><b>Decision metric:</b> cost per trial start (not CTR). <b>Rule:</b> kill ad sets below 50% of the best after ~50 clicks; scale the winning angle, then test new hooks within it.</p>
+    </div>
+    <p class="callout so-what"><span class="tag">Next</span> Refresh the competitor ad read (<code>vantage-ads</code>) monthly — when the set finally moves onto speed-to-value, change the angle before it gets crowded.</p>
+  </section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="mk"><svg viewBox="0 0 64 64" width="20" height="20"><rect width="64" height="64" rx="15" fill="#0c0d10"/><path d="M10 48 L24 24 L33 38 L40 28 L54 48 Z" fill="#fff"/></svg></span>
+    Campaign Concepts (sample) · Generated by the <b>Vantage</b> Paid-Media Lab · Illustrative fictional data
+  </div>
+</footer>
+</body>
+</html>

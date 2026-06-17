@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Vantage.os — Marketing Intelligence OS. Beautiful, evidence-backed competitive teardowns and marketing creation (positioning, ads, content, lifecycle), inside your agent.",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "repository": "https://github.com/macmenes/vantage"
   },
   "plugins": [
@@ -14,7 +14,7 @@
       "name": "vantage",
       "source": ".",
       "description": "Vantage.os — Marketing Intelligence OS. ANALYZE the field (Digital Share-of-Voice index, positioning map, competitive matrix, sales battlecards) and BUILD your marketing (positioning & messaging house, paid-media ad concepts, content plan, lifecycle/email flows). Every skill delivers a beautiful self-contained HTML report. Web-only, no API keys. 13 skills across 5 packs, driven by a one-question-at-a-time /vantage console.",
-      "version": "0.2.0",
+      "version": "0.2.1",
       "category": "marketing",
       "tags": [
         "competitive-analysis",
